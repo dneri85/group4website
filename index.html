@@ -792,6 +792,29 @@ footer {
 
 footer a { color: var(--sky); text-decoration: none; }
 
+/* ── HAMBURGER ────────────────────────────────────── */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 6px;
+}
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: rgba(255,255,255,0.8);
+  border-radius: 2px;
+  transition: all 0.25s;
+}
+
+/* ── TABLE SCROLL ─────────────────────────────────── */
+.table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: 14px; }
+.table-scroll .compare-table { min-width: 560px; }
+
 /* ── RESPONSIVE ───────────────────────────────────── */
 @media (max-width: 900px) {
   .hero-content { grid-template-columns: 1fr; gap: 2.5rem; }
@@ -803,7 +826,36 @@ footer a { color: var(--sky); text-decoration: none; }
   .team-cards { grid-template-columns: 1fr; }
   .vision-box { grid-template-columns: 1fr; }
   .stat-row { grid-template-columns: 1fr 1fr; }
-  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 64px; left: 0; right: 0;
+    background: rgba(11,31,58,0.98);
+    backdrop-filter: blur(12px);
+    flex-direction: column;
+    padding: 0.75rem;
+    border-bottom: 1px solid var(--glassborder);
+    gap: 0.1rem;
+  }
+  .nav-links.open { display: flex; }
+  .nav-links li { width: 100%; }
+  .nav-links a { display: block; padding: 0.65rem 1rem; }
+}
+
+@media (max-width: 480px) {
+  .hero-nav-cards { grid-template-columns: 1fr; }
+  .video-grid { grid-template-columns: 1fr; }
+  section { padding: 3.5rem 1.25rem; }
+  .hero-content { padding: 5rem 1.25rem 3rem; }
+  .ai-intro { padding: 1.5rem; gap: 1rem; }
+  .bridge { padding: 1.5rem; }
+  .vision-box { padding: 1.5rem; }
+  .hcv-card { padding: 1.25rem; }
+  .team-card { padding: 1.25rem; }
+  .policy-body { padding: 1rem; }
+  .ai-domain-body { padding: 1rem; }
+  .ai-domain-header { padding: 1rem; }
 }
 </style>
 </head>
@@ -812,6 +864,9 @@ footer a { color: var(--sky); text-decoration: none; }
 <!-- NAV -->
 <nav>
   <div class="nav-brand">HCV<span>+</span>AI &nbsp;&middot;&nbsp; INFM 210</div>
+  <button class="hamburger" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
   <ul class="nav-links">
     <li><a href="#home">Home</a></li>
     <li><a href="#about">About HCV</a></li>
@@ -1141,7 +1196,7 @@ footer a { color: var(--sky); text-decoration: none; }
 
     <!-- Comparison table -->
     <h3 style="font-family:'DM Serif Display',serif;font-size:1.4rem;color:var(--navy);margin-top:3rem;margin-bottom:0.5rem">Liver Biopsy vs. AI: Side-by-Side Comparison</h3>
-    <table class="compare-table">
+    <div class="table-scroll"><table class="compare-table">
       <thead>
         <tr>
           <th>Measure</th>
@@ -1158,7 +1213,7 @@ footer a { color: var(--sky); text-decoration: none; }
         <tr><td>Detection rate vs. standard care</td><td>Baseline</td><td>+43% improvement</td></tr>
         <tr><td>Cost</td><td>High (procedure + lab)</td><td>Uses existing EHR/lab data</td></tr>
       </tbody>
-    </table>
+    </table></div>
     <p style="font-size:0.75rem;color:#889;margin-top:0.5rem"><em>Sources: Chowdhury &amp; Mehta (2023); Bal (2024); Wang et al. (2019); Butt et al. (2021)</em></p>
   </div>
 </section>
@@ -1399,5 +1454,19 @@ footer a { color: var(--sky); text-decoration: none; }
   <p style="margin-top:0.75rem;font-size:0.72rem">Sources: <a href="https://www.cdc.gov/hepatitisc">CDC</a> &middot; <a href="https://www.who.int/news-room/fact-sheets/detail/hepatitis-c">WHO</a> &middot; Bal (2024) &middot; Butt et al. (2021) &middot; Chowdhury &amp; Mehta (2023) &middot; Bernal &amp; Soti (2023)</p>
 </footer>
 
+<script>
+  const toggle = document.getElementById('nav-toggle');
+  const navLinks = document.querySelector('.nav-links');
+  toggle.addEventListener('click', function() {
+    const open = navLinks.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open);
+  });
+  navLinks.querySelectorAll('a').forEach(function(a) {
+    a.addEventListener('click', function() {
+      navLinks.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+</script>
 </body>
 </html>

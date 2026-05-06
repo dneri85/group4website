@@ -277,9 +277,53 @@ footer {
 }
 footer a { color: var(--sky); text-decoration: none; }
 
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 6px;
+}
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: rgba(255,255,255,0.8);
+  border-radius: 2px;
+  transition: all 0.25s;
+}
+
+@media (max-width: 900px) {
+  .hamburger { display: flex; }
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 64px; left: 0; right: 0;
+    background: rgba(11,31,58,0.98);
+    backdrop-filter: blur(12px);
+    flex-direction: column;
+    padding: 0.75rem;
+    border-bottom: 1px solid var(--glassborder);
+    gap: 0.1rem;
+  }
+  .nav-links.open { display: flex; }
+  .nav-links li { width: 100%; }
+  .nav-links a { display: block; padding: 0.65rem 1rem; }
+  .filter-bar { padding: 1.25rem 1.25rem 0; }
+  .refs-main { padding: 2rem 1.25rem 4rem; }
+  .page-hero { padding: 6rem 1.25rem 3rem; }
+}
+
 @media (max-width: 700px) {
   .ref-card { grid-template-columns: 1fr; }
-  .nav-links { display: none; }
+  .ref-num { align-self: auto; }
+}
+
+@media (max-width: 480px) {
+  .ref-card { padding: 1.25rem; }
+  .ref-group-header { margin: 2rem 0 1rem; }
 }
 </style>
 </head>
@@ -288,6 +332,9 @@ footer a { color: var(--sky); text-decoration: none; }
 <!-- NAV -->
 <nav>
   <div class="nav-brand">HCV<span>+</span>AI &nbsp;&middot;&nbsp; INFM 210</div>
+  <button class="hamburger" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
   <ul class="nav-links">
     <li><a href="index.html">Home</a></li>
     <li><a href="index.html#about">About HCV</a></li>
@@ -336,10 +383,10 @@ footer a { color: var(--sky); text-decoration: none; }
     <div class="ref-body">
       <div class="ref-type-row">
         <span class="ref-type type-journal">Peer-Reviewed</span>
-        <span class="ref-journal-tag">World Journal of Hepatology</span>
+        <span class="ref-journal-tag">Viral Hepatitis</span>
       </div>
       <div class="ref-citation">
-        Bal, C. G. (2024). Artificial intelligence in the care of hepatitis C virus infection. <em>World Journal of Hepatology, 16</em>(1), 1–20.
+        Bal, T. (2024). Artificial intelligence in the diagnosis and management of viral hepatitis. <em>Viral Hepatitis, 30</em>(1).
       </div>
       <div class="ref-summary">
         <strong>Why we used this source</strong>
@@ -489,6 +536,27 @@ footer a { color: var(--sky); text-decoration: none; }
     </div>
   </div>
 
+  <!-- WHO 2025 -->
+  <div class="ref-card">
+    <div class="ref-num num-green">09</div>
+    <div class="ref-body">
+      <div class="ref-type-row">
+        <span class="ref-type type-gov">Government</span>
+        <span class="ref-journal-tag">World Health Organization</span>
+      </div>
+      <div class="ref-citation">
+        World Health Organization. (2025). <em>Hepatitis C.</em>
+      </div>
+      <div class="ref-summary">
+        <strong>Why we used this source</strong>
+        The WHO's hepatitis C fact sheet provides global epidemiological data cited throughout the site — including 50–60 million people living with chronic HCV infection, approximately 1 million new cases annually, and 290,000 deaths per year. It also covers transmission routes, the absence of an approved vaccine, and the &gt;95% DAA cure rate. This is a primary reference for the About HCV section's global statistics, transmission, prevention, and treatment information.
+      </div>
+      <a href="https://www.who.int/news-room/fact-sheets/detail/hepatitis-c" target="_blank" class="ref-link">
+        ↗ who.int/news-room/fact-sheets/detail/hepatitis-c
+      </a>
+    </div>
+  </div>
+
   <!-- GROUP 3: POLICY & LAW -->
   <div class="ref-group-header">
     <div class="group-icon orange">⚖️</div>
@@ -633,5 +701,65 @@ footer a { color: var(--sky); text-decoration: none; }
   <p style="margin-top:0.5rem">Andrea Jawwad &middot; Daniza Neri &middot; Miguel Morales</p>
 </footer>
 
+<script>
+  // Hamburger nav toggle
+  const toggle = document.getElementById('nav-toggle');
+  const navLinks = document.querySelector('.nav-links');
+  toggle.addEventListener('click', function() {
+    const open = navLinks.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open);
+  });
+  navLinks.querySelectorAll('a').forEach(function(a) {
+    a.addEventListener('click', function() {
+      navLinks.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  // Reference filter buttons
+  const filterMap = {
+    'All Sources':              null,
+    'Peer-Reviewed':            'type-journal',
+    'Government / CDC / WHO':   'type-gov',
+    'Policy & Law':             'type-policy',
+    'Clinical Guidelines':      'type-clinical'
+  };
+
+  const filterBtns   = document.querySelectorAll('.filter-btn');
+  const refCards     = document.querySelectorAll('.ref-card');
+  const groupHeaders = document.querySelectorAll('.ref-group-header');
+
+  filterBtns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      filterBtns.forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+
+      const typeClass = filterMap[btn.textContent.trim()];
+
+      refCards.forEach(function(card) {
+        if (!typeClass) {
+          card.style.display = '';
+        } else {
+          const hasType = card.querySelector('.' + typeClass);
+          card.style.display = hasType ? '' : 'none';
+        }
+      });
+
+      // Hide group headers when all their cards are hidden
+      groupHeaders.forEach(function(header) {
+        let sibling = header.nextElementSibling;
+        let hasVisible = false;
+        while (sibling && !sibling.classList.contains('ref-group-header')) {
+          if (sibling.classList.contains('ref-card') && sibling.style.display !== 'none') {
+            hasVisible = true;
+            break;
+          }
+          sibling = sibling.nextElementSibling;
+        }
+        header.style.display = hasVisible ? '' : 'none';
+      });
+    });
+  });
+</script>
 </body>
 </html>
