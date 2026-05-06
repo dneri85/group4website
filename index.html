@@ -894,6 +894,77 @@ footer a { color: var(--sky); text-decoration: none; }
   color: var(--navy);
 }
 
+/* ── VIDEO CATEGORIES ─────────────────────────────── */
+.video-cat-header {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.05rem;
+  color: var(--navy);
+  margin: 1.75rem 0 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--gray);
+}
+.video-cat-header:first-of-type { margin-top: 0; }
+
+.video-label-title {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.9);
+  font-weight: 500;
+  line-height: 1.35;
+  margin-bottom: 0.15rem;
+}
+.video-label-speaker {
+  font-size: 0.65rem;
+  color: rgba(255,255,255,0.5);
+  font-family: 'Space Mono', monospace;
+}
+
+.video-link-card {
+  border-radius: 12px;
+  background: linear-gradient(135deg, #0B1F3A, #1450A3);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1.25rem;
+  text-align: center;
+  aspect-ratio: 16/9;
+  border: 1px solid var(--glassborder);
+  transition: transform 0.2s, box-shadow 0.2s;
+  gap: 0.35rem;
+}
+.video-link-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+}
+.video-link-icon { font-size: 1.6rem; }
+.video-link-title {
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.92);
+  font-weight: 600;
+  line-height: 1.4;
+}
+.video-link-speaker {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.6rem;
+  color: rgba(255,255,255,0.5);
+}
+.video-link-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 100px;
+  padding: 0.2rem 0.6rem;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.58rem;
+  color: var(--sky);
+  letter-spacing: 0.05em;
+  margin-top: 0.25rem;
+}
+
 /* ── HAMBURGER ────────────────────────────────────── */
 .hamburger {
   display: none;
@@ -1441,30 +1512,136 @@ footer a { color: var(--sky); text-decoration: none; }
     <!-- All Videos -->
     <div class="resource-section">
       <h3 class="resource-section-title">📺 Curated Videos</h3>
-      <div class="video-grid-lg">
+
+      <!-- HCV -->
+      <div class="video-cat-header">🦠 Hepatitis C</div>
+      <div class="video-grid-lg" style="margin-bottom:1.5rem">
         <div class="video-embed">
-          <iframe src="https://www.youtube.com/embed/uvqDTbusdUU" allowfullscreen title="What is Hepatitis C?"></iframe>
-          <div class="video-label">What is Hepatitis C?</div>
+          <iframe src="https://www.youtube.com/embed/j3-_ReZ2RBs" allowfullscreen title="Hep C: The Curable Virus that We Aren't Curing"></iframe>
+          <div class="video-label">
+            <div class="video-label-title">Hep C: The Curable Virus that We Aren't Curing</div>
+            <div class="video-label-speaker">Maggie Beiser · TEDxTufts</div>
+          </div>
+        </div>
+        <div class="video-embed">
+          <iframe src="https://www.youtube.com/embed/cao9HFabxTo" allowfullscreen title="25 Years From Discovery To Cure: The Hepatitis C Story"></iframe>
+          <div class="video-label">
+            <div class="video-label-title">25 Years From Discovery To Cure: The Hepatitis C Story</div>
+            <div class="video-label-speaker">Nezam Afdhal · TEDxOxford</div>
+          </div>
+        </div>
+        <div class="video-embed">
+          <iframe src="https://www.youtube.com/embed/9t4ZA_3JOHs" allowfullscreen title="Hepatitis C: The Baby Boomer Virus"></iframe>
+          <div class="video-label">
+            <div class="video-label-title">Hepatitis C: The Baby Boomer Virus</div>
+            <div class="video-label-speaker">Lucinda Porter · TEDxGrassValley</div>
+          </div>
         </div>
         <div class="video-embed">
           <iframe src="https://www.youtube.com/embed/mkiDXTS6-mU" allowfullscreen title="HCV Transmission & Prevention"></iframe>
-          <div class="video-label">HCV Transmission &amp; Prevention</div>
+          <div class="video-label">
+            <div class="video-label-title">HCV Transmission &amp; Prevention</div>
+            <div class="video-label-speaker">Educational</div>
+          </div>
         </div>
         <div class="video-embed">
           <iframe src="https://www.youtube.com/embed/fStLnjrZF_c" allowfullscreen title="Diagnosis & Treatment"></iframe>
-          <div class="video-label">Diagnosis &amp; Treatment</div>
+          <div class="video-label">
+            <div class="video-label-title">Diagnosis &amp; Treatment</div>
+            <div class="video-label-speaker">Educational</div>
+          </div>
         </div>
         <div class="video-embed">
           <iframe src="https://www.youtube.com/embed/CXy1byguvJY" allowfullscreen title="Living with Hepatitis C"></iframe>
-          <div class="video-label">Living with Hepatitis C</div>
+          <div class="video-label">
+            <div class="video-label-title">Living with Hepatitis C</div>
+            <div class="video-label-speaker">Educational</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI in Healthcare -->
+      <div class="video-cat-header">🤖 AI in Healthcare</div>
+      <div class="video-grid-lg" style="margin-bottom:1.5rem">
+        <div class="video-embed">
+          <iframe src="https://www.youtube.com/embed/ll5LY7wI_Xc" allowfullscreen title="Can AI catch what doctors miss?"></iframe>
+          <div class="video-label">
+            <div class="video-label-title">Can AI Catch What Doctors Miss?</div>
+            <div class="video-label-speaker">Eric Topol · TED 2023</div>
+          </div>
+        </div>
+        <div class="video-embed">
+          <iframe src="https://www.youtube.com/embed/uvqDTbusdUU" allowfullscreen title="Artificial Intelligence in Healthcare: Opportunities and Challenges"></iframe>
+          <div class="video-label">
+            <div class="video-label-title">AI in Healthcare: Opportunities and Challenges</div>
+            <div class="video-label-speaker">Navid Toosi Saidy · TEDxQUT</div>
+          </div>
+        </div>
+        <div class="video-embed">
+          <iframe src="https://www.youtube.com/embed/HrKzXLgGohA" allowfullscreen title="Artificial Intelligence Can Change the Future of Medical Diagnosis"></iframe>
+          <div class="video-label">
+            <div class="video-label-title">AI Can Change the Future of Medical Diagnosis</div>
+            <div class="video-label-speaker">Shinjini Kundu · TEDxPittsburgh</div>
+          </div>
+        </div>
+        <a href="https://www.tedmed.com/talks/show?id=687191" target="_blank" class="video-link-card">
+          <div class="video-link-icon">▶</div>
+          <div class="video-link-title">How Doctors Can Help AI to Revolutionize Medicine</div>
+          <div class="video-link-speaker">Greg Corrado · TEDMED</div>
+          <div class="video-link-badge">↗ Watch on TEDMED</div>
+        </a>
+        <a href="https://www.tedmed.com/conversations-podcast/the-promise-and-limits-of-ai-in-medicine/" target="_blank" class="video-link-card">
+          <div class="video-link-icon">🎙</div>
+          <div class="video-link-title">The Promise, and Limits, of AI in Medicine</div>
+          <div class="video-link-speaker">Bruce Schneier &amp; Leana Wen · TEDMED Podcast</div>
+          <div class="video-link-badge">↗ Listen on TEDMED</div>
+        </a>
+      </div>
+
+      <!-- AI Regulations & Ethics -->
+      <div class="video-cat-header">⚖️ AI Regulations &amp; Ethics</div>
+      <div class="video-grid-lg">
+        <div class="video-embed">
+          <iframe src="https://www.youtube.com/embed/4oPpSFp87iE" allowfullscreen title="Artificial Intelligence in Healthcare — The Need for Ethics"></iframe>
+          <div class="video-label">
+            <div class="video-label-title">AI in Healthcare — The Need for Ethics</div>
+            <div class="video-label-speaker">Varoon Mathur · TEDxUBC</div>
+          </div>
+        </div>
+        <div class="video-embed">
+          <iframe src="https://www.youtube.com/embed/MDYZXB97Pws" allowfullscreen title="Understanding the Ethical Dance of AI and Healthcare"></iframe>
+          <div class="video-label">
+            <div class="video-label-title">Understanding the Ethical Dance of AI and Healthcare</div>
+            <div class="video-label-speaker">Ashleigh Kennedy · TED</div>
+          </div>
+        </div>
+        <div class="video-embed">
+          <iframe src="https://www.youtube.com/embed/mhEYvrFOP88" allowfullscreen title="How AI Is Making It Easier to Diagnose Disease"></iframe>
+          <div class="video-label">
+            <div class="video-label-title">How AI Is Making It Easier to Diagnose Disease</div>
+            <div class="video-label-speaker">Pratik Shah · TED</div>
+          </div>
+        </div>
+        <div class="video-embed">
+          <iframe src="https://www.youtube.com/embed/2LRwvU6gEbA" allowfullscreen title="How to Get Empowered, Not Overpowered, by AI"></iframe>
+          <div class="video-label">
+            <div class="video-label-title">How to Get Empowered, Not Overpowered, by AI</div>
+            <div class="video-label-speaker">Max Tegmark · TED</div>
+          </div>
         </div>
         <div class="video-embed">
           <iframe src="https://www.youtube.com/embed/PJC89XtFf7s" allowfullscreen title="Healthcare Policies Overview"></iframe>
-          <div class="video-label">Healthcare Policies Overview</div>
+          <div class="video-label">
+            <div class="video-label-title">Healthcare Policies Overview</div>
+            <div class="video-label-speaker">Educational</div>
+          </div>
         </div>
         <div class="video-embed">
           <iframe src="https://www.youtube.com/embed/Wp-ApzPObnI" allowfullscreen title="AI Regulations in Healthcare"></iframe>
-          <div class="video-label">AI Regulations in Healthcare</div>
+          <div class="video-label">
+            <div class="video-label-title">AI Regulations in Healthcare</div>
+            <div class="video-label-speaker">Educational</div>
+          </div>
         </div>
       </div>
     </div>
