@@ -1,0 +1,1403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leveraging AI to Support Evidence-Based Hepatitis C Prevention</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #0B1F3A;
+  --blue: #1450A3;
+  --teal: #0E86D4;
+  --sky: #53C0F0;
+  --orange: #E87722;
+  --amber: #F4A636;
+  --white: #FFFFFF;
+  --offwhite: #F7F9FC;
+  --gray: #E8EDF4;
+  --midgray: #8899AA;
+  --dark: #0D1B2A;
+  --glass: rgba(255,255,255,0.08);
+  --glassborder: rgba(255,255,255,0.15);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--offwhite);
+  color: var(--dark);
+  overflow-x: hidden;
+}
+
+/* ── NAV ──────────────────────────────────────────── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(11,31,58,0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--glassborder);
+  padding: 0 2rem;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 64px;
+}
+
+.nav-brand {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--sky);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.nav-brand span { color: var(--orange); }
+
+.nav-links {
+  display: flex; gap: 0.25rem; list-style: none;
+}
+
+.nav-links a {
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  font-size: 0.82rem;
+  font-weight: 500;
+  padding: 0.4rem 0.75rem;
+  border-radius: 6px;
+  transition: all 0.2s;
+  letter-spacing: 0.02em;
+}
+
+.nav-links a:hover {
+  color: var(--white);
+  background: var(--glass);
+}
+
+/* ── HERO ─────────────────────────────────────────── */
+#home {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0B1F3A 0%, #0E3A6E 50%, #1450A3 100%);
+  position: relative;
+  display: flex; align-items: center;
+  overflow: hidden;
+}
+
+.hero-grid {
+  position: absolute; inset: 0; opacity: 0.06;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+.hero-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.25;
+}
+.orb1 { width: 600px; height: 600px; background: var(--teal); top: -200px; right: -100px; }
+.orb2 { width: 400px; height: 400px; background: var(--orange); bottom: -100px; left: 10%; }
+
+.hero-content {
+  position: relative; z-index: 2;
+  max-width: 1200px; margin: 0 auto;
+  padding: 6rem 2rem 4rem;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+}
+
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: var(--glass);
+  border: 1px solid var(--glassborder);
+  border-radius: 100px;
+  padding: 0.35rem 1rem;
+  font-size: 0.75rem;
+  font-family: 'Space Mono', monospace;
+  color: var(--sky);
+  letter-spacing: 0.05em;
+  margin-bottom: 1.5rem;
+}
+
+.hero-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--orange);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.3); }
+}
+
+.hero-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(2.4rem, 4vw, 3.6rem);
+  line-height: 1.1;
+  color: var(--white);
+  margin-bottom: 1.5rem;
+}
+
+.hero-title em {
+  font-style: italic;
+  color: var(--sky);
+}
+
+.hero-subtitle {
+  font-size: 1.05rem;
+  color: rgba(255,255,255,0.7);
+  line-height: 1.7;
+  margin-bottom: 2rem;
+  font-weight: 300;
+}
+
+.hero-warning {
+  background: rgba(232,119,34,0.15);
+  border: 1px solid rgba(232,119,34,0.4);
+  border-radius: 10px;
+  padding: 0.85rem 1.2rem;
+  font-size: 0.82rem;
+  color: var(--amber);
+  line-height: 1.5;
+}
+
+.hero-warning strong { display: block; margin-bottom: 0.2rem; }
+
+.hero-nav-cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+}
+
+.hero-nav-card {
+  background: var(--glass);
+  border: 1px solid var(--glassborder);
+  border-radius: 14px;
+  padding: 1.4rem;
+  text-decoration: none;
+  transition: all 0.3s;
+  display: block;
+}
+
+.hero-nav-card:hover {
+  background: rgba(255,255,255,0.12);
+  transform: translateY(-3px);
+  border-color: rgba(255,255,255,0.25);
+}
+
+.card-icon {
+  font-size: 1.8rem;
+  margin-bottom: 0.75rem;
+  display: block;
+}
+
+.card-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--sky);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.3rem;
+}
+
+.card-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 0.4rem;
+}
+
+.card-desc {
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.5;
+}
+
+/* ── SECTION BASE ─────────────────────────────────── */
+section { padding: 5rem 2rem; }
+
+.section-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-tag {
+  display: inline-block;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--orange);
+  background: rgba(232,119,34,0.1);
+  border: 1px solid rgba(232,119,34,0.25);
+  border-radius: 100px;
+  padding: 0.3rem 0.85rem;
+  margin-bottom: 1rem;
+}
+
+.section-tag.blue {
+  color: var(--teal);
+  background: rgba(14,134,212,0.1);
+  border-color: rgba(14,134,212,0.25);
+}
+
+.section-tag.green {
+  color: #2DB87A;
+  background: rgba(45,184,122,0.1);
+  border-color: rgba(45,184,122,0.25);
+}
+
+.section-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  color: var(--navy);
+  line-height: 1.2;
+  margin-bottom: 0.75rem;
+}
+
+.section-sub {
+  font-size: 1rem;
+  color: var(--midgray);
+  line-height: 1.7;
+  max-width: 620px;
+  margin-bottom: 3rem;
+}
+
+/* ── ABOUT HCV ────────────────────────────────────── */
+#about { background: var(--offwhite); }
+
+.hcv-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.hcv-card {
+  background: var(--white);
+  border: 1px solid var(--gray);
+  border-radius: 16px;
+  padding: 2rem;
+  transition: box-shadow 0.3s;
+}
+
+.hcv-card:hover { box-shadow: 0 8px 30px rgba(20,80,163,0.08); }
+
+.hcv-card-header {
+  display: flex; align-items: center; gap: 0.75rem;
+  margin-bottom: 1.25rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--gray);
+}
+
+.hcv-icon {
+  width: 44px; height: 44px;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
+
+.hcv-icon.blue { background: rgba(20,80,163,0.1); }
+.hcv-icon.teal { background: rgba(14,134,212,0.1); }
+.hcv-icon.orange { background: rgba(232,119,34,0.1); }
+.hcv-icon.green { background: rgba(45,184,122,0.1); }
+.hcv-icon.purple { background: rgba(120,80,200,0.1); }
+.hcv-icon.red { background: rgba(220,50,50,0.1); }
+
+.hcv-card h3 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.15rem;
+  color: var(--navy);
+}
+
+.hcv-card p {
+  font-size: 0.9rem;
+  color: #445566;
+  line-height: 1.75;
+}
+
+.hcv-card ul {
+  list-style: none;
+  margin-top: 0.75rem;
+}
+
+.hcv-card ul li {
+  font-size: 0.88rem;
+  color: #445566;
+  padding: 0.3rem 0;
+  display: flex; align-items: flex-start; gap: 0.6rem;
+  line-height: 1.5;
+}
+
+.hcv-card ul li::before {
+  content: '›';
+  color: var(--teal);
+  font-weight: 700;
+  font-size: 1rem;
+  flex-shrink: 0;
+  margin-top: 0.05rem;
+}
+
+.full-width { grid-column: 1 / -1; }
+
+/* History timeline */
+.timeline {
+  position: relative;
+  padding-left: 2.5rem;
+  margin-top: 1.25rem;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute; left: 8px; top: 0; bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--teal), var(--orange));
+  border-radius: 2px;
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 1.25rem;
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute; left: -2.1rem; top: 0.35rem;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--white);
+  border: 2px solid var(--teal);
+}
+
+.timeline-year {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--orange);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.2rem;
+}
+
+.timeline-text {
+  font-size: 0.88rem;
+  color: #445566;
+  line-height: 1.55;
+}
+
+/* Stats row */
+.stat-row {
+  display: grid; grid-template-columns: repeat(4,1fr); gap: 1.25rem;
+  margin: 2.5rem 0;
+}
+
+.stat-card {
+  background: var(--navy);
+  border-radius: 14px;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.stat-num {
+  font-family: 'DM Serif Display', serif;
+  font-size: 2rem;
+  color: var(--sky);
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+.stat-label {
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.6);
+  line-height: 1.4;
+}
+
+/* ── AI SECTION ───────────────────────────────────── */
+#ai { background: linear-gradient(180deg, var(--offwhite) 0%, #EBF3FC 100%); }
+
+.ai-intro {
+  background: var(--navy);
+  border-radius: 20px;
+  padding: 2.5rem;
+  margin-bottom: 3rem;
+  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.5rem;
+}
+
+.ai-stat-pill {
+  background: var(--glass);
+  border: 1px solid var(--glassborder);
+  border-radius: 14px;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.ai-stat-num {
+  font-family: 'DM Serif Display', serif;
+  font-size: 2.5rem;
+  color: var(--sky);
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+.ai-stat-tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--orange);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.ai-stat-desc {
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.6);
+  line-height: 1.5;
+}
+
+.ai-domains {
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem;
+}
+
+.ai-domain {
+  background: var(--white);
+  border: 1px solid var(--gray);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.ai-domain-header {
+  padding: 1.5rem;
+  display: flex; align-items: center; gap: 1rem;
+}
+
+.ai-domain-header.prevention { background: linear-gradient(135deg, #0B1F3A, #1450A3); }
+.ai-domain-header.screening { background: linear-gradient(135deg, #0B3A2A, #0E7A5A); }
+.ai-domain-header.treatment { background: linear-gradient(135deg, #3A1A0B, #A35014); }
+
+.domain-icon {
+  width: 48px; height: 48px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.15);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.domain-name {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.2rem;
+  color: var(--white);
+}
+
+.domain-tagline {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.65);
+  margin-top: 0.15rem;
+}
+
+.ai-domain-body { padding: 1.5rem; }
+
+.ai-finding {
+  display: flex; gap: 0.85rem;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--gray);
+}
+
+.ai-finding:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+.finding-badge {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+  white-space: nowrap;
+  align-self: flex-start;
+  flex-shrink: 0;
+}
+
+.badge-blue { background: rgba(20,80,163,0.1); color: var(--blue); }
+.badge-green { background: rgba(14,122,90,0.1); color: #0E7A5A; }
+.badge-orange { background: rgba(232,119,34,0.1); color: var(--orange); }
+
+.finding-text {
+  font-size: 0.85rem;
+  color: #334455;
+  line-height: 1.6;
+}
+
+.finding-text strong { color: var(--navy); }
+
+/* Comparison table */
+.compare-table {
+  width: 100%; border-collapse: collapse;
+  margin-top: 2.5rem;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+}
+
+.compare-table th {
+  padding: 1rem 1.25rem;
+  text-align: left;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.compare-table th:first-child { background: #E8EDF4; color: var(--navy); }
+.compare-table th:nth-child(2) { background: #E8EDF4; color: #AA3300; }
+.compare-table th:nth-child(3) { background: var(--navy); color: var(--sky); }
+
+.compare-table td {
+  padding: 0.85rem 1.25rem;
+  font-size: 0.85rem;
+  border-bottom: 1px solid var(--gray);
+}
+
+.compare-table tr:last-child td { border-bottom: none; }
+.compare-table tr:nth-child(odd) td { background: var(--white); }
+.compare-table tr:nth-child(even) td { background: #F7F9FC; }
+
+.compare-table td:nth-child(3) { color: #0E7A5A; font-weight: 600; }
+
+/* ── POLICIES ─────────────────────────────────────── */
+#policies { background: var(--white); }
+
+.policy-grid {
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem;
+}
+
+.policy-card {
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--gray);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.policy-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(20,80,163,0.1);
+}
+
+.policy-header {
+  padding: 1.5rem;
+  background: var(--navy);
+}
+
+.policy-law {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--sky);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+}
+
+.policy-name {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.1rem;
+  color: var(--white);
+  line-height: 1.3;
+}
+
+.policy-body { padding: 1.4rem; background: var(--white); }
+
+.policy-body p {
+  font-size: 0.85rem;
+  color: #445566;
+  line-height: 1.7;
+  margin-bottom: 0.75rem;
+}
+
+.policy-body p:last-child { margin-bottom: 0; }
+
+.policy-relevance {
+  background: rgba(232,119,34,0.08);
+  border-left: 3px solid var(--orange);
+  border-radius: 0 8px 8px 0;
+  padding: 0.75rem 1rem;
+  font-size: 0.8rem;
+  color: #663300;
+  line-height: 1.5;
+  margin-top: 1rem;
+}
+
+.policy-relevance strong { display: block; margin-bottom: 0.2rem; color: var(--orange); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.05em; }
+
+/* Bridge section */
+.bridge {
+  background: linear-gradient(135deg, var(--navy), #1450A3);
+  border-radius: 20px;
+  padding: 2.5rem;
+  margin-bottom: 3rem;
+  color: var(--white);
+}
+
+.bridge h3 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.bridge p {
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.75);
+  line-height: 1.75;
+  margin-bottom: 0.75rem;
+}
+
+/* ── RESOURCES ────────────────────────────────────── */
+#resources { background: var(--offwhite); }
+
+.resources-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;
+}
+
+.resource-group h3 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.4rem;
+  color: var(--navy);
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid var(--gray);
+}
+
+.video-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+}
+
+.video-embed {
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--navy);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+}
+
+.video-embed iframe {
+  width: 100%; display: block;
+  aspect-ratio: 16/9;
+  border: none;
+}
+
+.video-label {
+  padding: 0.6rem 0.85rem;
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.7);
+  font-weight: 500;
+}
+
+/* ── TEAM ─────────────────────────────────────────── */
+#team { background: var(--navy); }
+
+#team .section-title { color: var(--white); }
+#team .section-sub { color: rgba(255,255,255,0.6); }
+
+.vision-box {
+  background: var(--glass);
+  border: 1px solid var(--glassborder);
+  border-radius: 16px;
+  padding: 2rem;
+  margin-bottom: 3rem;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;
+}
+
+.vision-box h3 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.1rem;
+  color: var(--sky);
+  margin-bottom: 0.75rem;
+}
+
+.vision-box p {
+  font-size: 0.88rem;
+  color: rgba(255,255,255,0.65);
+  line-height: 1.75;
+}
+
+.team-cards {
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem;
+}
+
+.team-card {
+  background: var(--glass);
+  border: 1px solid var(--glassborder);
+  border-radius: 16px;
+  padding: 1.75rem;
+  transition: all 0.3s;
+}
+
+.team-card:hover {
+  background: rgba(255,255,255,0.1);
+  transform: translateY(-4px);
+}
+
+.team-avatar {
+  width: 72px; height: 72px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.6rem;
+  color: var(--white);
+  margin-bottom: 1rem;
+  flex-shrink: 0;
+}
+
+.avatar-a { background: linear-gradient(135deg, #1450A3, #0E86D4); }
+.avatar-d { background: linear-gradient(135deg, #E87722, #F4A636); }
+.avatar-m { background: linear-gradient(135deg, #0B3A2A, #0E7A5A); }
+
+.team-role {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--orange);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.35rem;
+}
+
+.team-name {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.2rem;
+  color: var(--white);
+  margin-bottom: 0.75rem;
+}
+
+.team-bio {
+  font-size: 0.83rem;
+  color: rgba(255,255,255,0.6);
+  line-height: 1.7;
+}
+
+.team-slides {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  margin-top: 1rem;
+  background: rgba(14,134,212,0.2);
+  border: 1px solid rgba(14,134,212,0.3);
+  border-radius: 100px;
+  padding: 0.3rem 0.75rem;
+  font-size: 0.72rem;
+  color: var(--sky);
+  font-family: 'Space Mono', monospace;
+}
+
+/* ── FOOTER ───────────────────────────────────────── */
+footer {
+  background: #060E1A;
+  padding: 2rem;
+  text-align: center;
+  color: rgba(255,255,255,0.35);
+  font-size: 0.78rem;
+  line-height: 1.7;
+}
+
+footer a { color: var(--sky); text-decoration: none; }
+
+/* ── RESPONSIVE ───────────────────────────────────── */
+@media (max-width: 900px) {
+  .hero-content { grid-template-columns: 1fr; gap: 2.5rem; }
+  .hcv-grid { grid-template-columns: 1fr; }
+  .ai-domains { grid-template-columns: 1fr; }
+  .ai-intro { grid-template-columns: 1fr; }
+  .policy-grid { grid-template-columns: 1fr; }
+  .resources-grid { grid-template-columns: 1fr; }
+  .team-cards { grid-template-columns: 1fr; }
+  .vision-box { grid-template-columns: 1fr; }
+  .stat-row { grid-template-columns: 1fr 1fr; }
+  .nav-links { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">HCV<span>+</span>AI &nbsp;&middot;&nbsp; INFM 210</div>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">About HCV</a></li>
+    <li><a href="#ai">AI in HCV Care</a></li>
+    <li><a href="#policies">Policies &amp; Laws</a></li>
+    <li><a href="#resources">Resources</a></li>
+    <li><a href="#team">Our Team</a></li>
+    <li><a href="references.html">References</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="home">
+  <div class="hero-grid"></div>
+  <div class="hero-orb orb1"></div>
+  <div class="hero-orb orb2"></div>
+  <div class="hero-content">
+    <div>
+      <div class="hero-tag">
+        <span class="hero-dot"></span>
+        INFM 210 &middot; San José State University &middot; Group 4
+      </div>
+      <h1 class="hero-title">
+        Leveraging <em>AI</em> to Support Evidence-Based Hepatitis C Prevention
+      </h1>
+      <p class="hero-subtitle">
+        This project explores Hepatitis C as a major public health concern and examines how artificial intelligence can support healthcare systems in improving prevention, screening, and treatment outcomes.
+      </p>
+      <div class="hero-warning">
+        <strong>⚠️ Important Notice</strong>
+        AI is a support tool. Clinical decisions must remain grounded in scientifically validated, evidence-based medical practices.
+      </div>
+    </div>
+    <div>
+      <div class="hero-nav-cards">
+        <a href="#about" class="hero-nav-card">
+          <span class="card-icon">🦠</span>
+          <div class="card-label">Section 01</div>
+          <div class="card-title">About Hepatitis C</div>
+          <div class="card-desc">What it is, how it spreads, symptoms, diagnosis & treatment history</div>
+        </a>
+        <a href="#ai" class="hero-nav-card">
+          <span class="card-icon">🤖</span>
+          <div class="card-label">Section 02</div>
+          <div class="card-title">AI in HCV Care</div>
+          <div class="card-desc">How AI is transforming prevention, screening and treatment</div>
+        </a>
+        <a href="#policies" class="hero-nav-card">
+          <span class="card-icon">⚖️</span>
+          <div class="card-label">Section 03</div>
+          <div class="card-title">Policies &amp; Laws</div>
+          <div class="card-desc">HIPAA, ACA, FDA regulations and clinical guidelines</div>
+        </a>
+        <a href="#resources" class="hero-nav-card">
+          <span class="card-icon">📚</span>
+          <div class="card-label">Section 04</div>
+          <div class="card-title">Resources</div>
+          <div class="card-desc">Curated videos and educational content on HCV and AI</div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT HCV -->
+<section id="about">
+  <div class="section-inner">
+    <div class="section-tag">Miguel Morales &middot; Section 01</div>
+    <h2 class="section-title">Understanding Hepatitis C</h2>
+    <p class="section-sub">A comprehensive overview of HCV — from what it is and how it spreads, to how it is diagnosed, prevented, and treated.</p>
+
+    <!-- Global stats -->
+    <div class="stat-row">
+      <div class="stat-card">
+        <span class="stat-num">50–60M</span>
+        <span class="stat-label">people living with chronic HCV infection worldwide</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-num">~1M</span>
+        <span class="stat-label">new cases occurring annually</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-num">290K</span>
+        <span class="stat-label">deaths annually attributed to HCV</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-num">&gt;95%</span>
+        <span class="stat-label">cure rate with modern DAA treatment</span>
+      </div>
+    </div>
+
+    <div class="hcv-grid">
+      <!-- What is HCV -->
+      <div class="hcv-card">
+        <div class="hcv-card-header">
+          <div class="hcv-icon blue">🦠</div>
+          <h3>What is Hepatitis C?</h3>
+        </div>
+        <p>Hepatitis C is a bloodborne viral infection caused by the hepatitis C virus (HCV) that primarily targets the liver, often leading to chronic disease if untreated. It can be <strong>acute</strong> (short-term) or <strong>chronic</strong> (long-term), and is a major global health concern due to the risk of progressive liver damage.</p>
+        <p style="margin-top:0.75rem">Advances in direct-acting antiviral (DAA) therapies have made hepatitis C highly curable, with cure rates exceeding 95%, significantly reducing long-term complications. There is currently no widely available vaccine. <em style="font-size:0.78rem;color:#889">(WHO, 2025; CDC, 2025)</em></p>
+      </div>
+
+      <!-- Transmission -->
+      <div class="hcv-card">
+        <div class="hcv-card-header">
+          <div class="hcv-icon teal">🩸</div>
+          <h3>Transmission Routes</h3>
+        </div>
+        <p>HCV is primarily transmitted through exposure to infected blood. In high-income countries, most infections are due to shared needles among injection drug users. In low-to-middle-income countries, unsafe medical practices are the primary driver. <em style="font-size:0.78rem;color:#889">(WHO, 2025)</em></p>
+        <ul>
+          <li><strong>Primary:</strong> Sharing needles or syringes</li>
+          <li><strong>Primary:</strong> Contaminated medical equipment</li>
+          <li><strong>Primary:</strong> Blood transfusions (before screening)</li>
+          <li><strong>Less common:</strong> Sexual contact</li>
+          <li><strong>Less common:</strong> Mother-to-child during childbirth</li>
+          <li><strong>Not spread through:</strong> Casual contact, food, water, or respiratory droplets</li>
+        </ul>
+      </div>
+
+      <!-- Symptoms -->
+      <div class="hcv-card">
+        <div class="hcv-card-header">
+          <div class="hcv-icon orange">⚕️</div>
+          <h3>Signs &amp; Symptoms</h3>
+        </div>
+        <p>HCV infection is often asymptomatic in its early stages, making routine screening critical. <em style="font-size:0.78rem;color:#889">(CDC, 2025)</em></p>
+        <ul style="margin-top:0.75rem">
+          <li><strong>Acute phase (often silent):</strong> Fatigue, nausea, loss of appetite, jaundice (rare)</li>
+          <li><strong>Chronic phase:</strong> Often no symptoms for years</li>
+          <li><strong>Advanced disease:</strong> Chronic fatigue, abdominal pain, jaundice, easy bruising, dark urine, signs of cirrhosis</li>
+        </ul>
+        <p style="margin-top:0.75rem;font-size:0.83rem;color:#667">Because of this silent progression, early detection through routine screening is essential to prevent liver failure and hepatocellular carcinoma.</p>
+      </div>
+
+      <!-- Diagnosis -->
+      <div class="hcv-card">
+        <div class="hcv-card-header">
+          <div class="hcv-icon purple">🔬</div>
+          <h3>Diagnosis</h3>
+        </div>
+        <p>HCV infection is diagnosed through a two-step process. Routine screening is recommended for all adults at least once in their lifetime. <em style="font-size:0.78rem;color:#889">(CDC, 2025; WHO, 2025)</em></p>
+        <ul>
+          <li><strong>Step 1:</strong> Anti-HCV antibody test — indicates prior exposure</li>
+          <li><strong>Step 2:</strong> HCV RNA (NAT) test — confirms active infection</li>
+          <li><strong>Additional:</strong> Viral load, genotyping to guide treatment</li>
+          <li><strong>Liver assessment:</strong> Liver function tests (ALT, AST), imaging, or biopsy</li>
+        </ul>
+      </div>
+
+      <!-- Prevention -->
+      <div class="hcv-card">
+        <div class="hcv-card-header">
+          <div class="hcv-icon green">🛡️</div>
+          <h3>Prevention</h3>
+        </div>
+        <p>There is currently no vaccine for HCV. Prevention focuses on reducing exposure to infected blood. <em style="font-size:0.78rem;color:#889">(WHO, 2025; CDC, 2025)</em></p>
+        <ul>
+          <li>Needle and syringe exchange programs and opioid substitution therapy</li>
+          <li>Strict infection control in healthcare settings</li>
+          <li>Screening of blood, organ, and tissue donations</li>
+          <li>Education on avoiding shared personal items (razors, toothbrushes)</li>
+          <li>Targeted interventions for high-risk populations</li>
+          <li>Early treatment with DAAs to reduce viral reservoirs</li>
+        </ul>
+      </div>
+
+      <!-- Treatment -->
+      <div class="hcv-card">
+        <div class="hcv-card-header">
+          <div class="hcv-icon red">💊</div>
+          <h3>Treatment</h3>
+        </div>
+        <p>Treatment of HCV has been transformed by direct-acting antiviral (DAA) medications, which cure more than 95% of cases in just 8–12 weeks of oral therapy. <em style="font-size:0.78rem;color:#889">(WHO, 2025)</em></p>
+        <ul>
+          <li>DAAs are highly effective, well-tolerated, and often pan-genotypic</li>
+          <li>Early treatment prevents progression to cirrhosis and liver cancer</li>
+          <li>Treatment also reduces transmission at the population level</li>
+          <li>Comprehensive care includes monitoring liver function and coexisting conditions such as HIV or substance use disorders</li>
+        </ul>
+      </div>
+
+      <!-- History -->
+      <div class="hcv-card full-width">
+        <div class="hcv-card-header">
+          <div class="hcv-icon blue">📅</div>
+          <h3>History &amp; Treatment Evolution</h3>
+        </div>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-year">1989</div>
+            <div class="timeline-text">Hepatitis C Virus discovered, explaining the prevalence of hepatitis infections not caused by Hepatitis A or B viruses.</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-year">Early 1990s</div>
+            <div class="timeline-text">Interferon-alpha introduced as first treatment. Success rate of approximately <strong>20%</strong>. Frequent injections required with significant side effects.</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-year">Late 1990s</div>
+            <div class="timeline-text">Combination therapy of Interferon-alpha and Ribavirin improves cure rate to <strong>30–40%</strong>. Still burdensome with side effects including anemia and depression.</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-year">~2001</div>
+            <div class="timeline-text">Pegylated interferon (Peg-IFN) + ribavirin becomes the global standard of care. Weekly dosing. SVR rates reach <strong>40–90%</strong> depending on genotype. Biopsy required before treatment decisions.</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-year">2011</div>
+            <div class="timeline-text">First-generation direct-acting antiviral (DAA) medications approved. More effective for genotype 1, but still required interferon and had severe side effects. SVR rates reach <strong>65–75%</strong>.</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-year">2014</div>
+            <div class="timeline-text">Modern DAA era begins with Harvoni (first once-daily single pill). Interferon-free. Mild side effects. Cure rates reach <strong>90–100%</strong>. Treatment duration reduced to 12 weeks.</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-year">2017–Present</div>
+            <div class="timeline-text">Pan-genotypic DAAs (Mavyret, Epclusa) effective across all HCV genotypes. <strong>95–98%+ SVR</strong>. 8–12 week courses. HCV became the first curable chronic viral infection.</div>
+          </div>
+        </div>
+        <p style="font-size:0.78rem;color:#889;margin-top:1rem"><em>References: Bernal &amp; Soti (2023); WHO (2025); CDC (2025)</em></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AI IN HCV CARE -->
+<section id="ai">
+  <div class="section-inner">
+    <div class="section-tag blue">Daniza Neri &middot; Section 02</div>
+    <h2 class="section-title">AI in HCV Care: Closing the Gap</h2>
+    <p class="section-sub">HCV is curable in 95% of cases, yet millions remain undiagnosed. The barrier is not the cure — it is detection, access, and timely clinical decisions. AI is closing that gap.</p>
+
+    <!-- Key stats -->
+    <div class="ai-intro">
+      <div class="ai-stat-pill">
+        <span class="ai-stat-tag">Prevention</span>
+        <span class="ai-stat-num">98%</span>
+        <div class="ai-stat-desc">Sensitivity — AI risk score vs ~60% traditional screening (Martínez-Sanz et al., 2022, as cited in Bal, 2024)</div>
+      </div>
+      <div class="ai-stat-pill">
+        <span class="ai-stat-tag">Screening</span>
+        <span class="ai-stat-num">92%</span>
+        <div class="ai-stat-desc">AI ultrasound accuracy vs 76.1% for experienced radiologists (Bal, 2024)</div>
+      </div>
+      <div class="ai-stat-pill">
+        <span class="ai-stat-tag">Treatment</span>
+        <span class="ai-stat-num">94.44%</span>
+        <div class="ai-stat-desc">ML fibrosis staging precision — no biopsy required (Butt et al., 2021)</div>
+      </div>
+    </div>
+
+    <!-- Three domains -->
+    <div class="ai-domains">
+      <!-- Prevention -->
+      <div class="ai-domain">
+        <div class="ai-domain-header prevention">
+          <div class="domain-icon">🛡️</div>
+          <div>
+            <div class="domain-name">Prevention</div>
+            <div class="domain-tagline">Finding who is at risk before symptoms appear</div>
+          </div>
+        </div>
+        <div class="ai-domain-body">
+          <div class="ai-finding">
+            <span class="finding-badge badge-blue">PROBLEM</span>
+            <p class="finding-text">3–4 million new HCV infections occur globally every year. Most infected individuals show <strong>no symptoms for months or years</strong>, leaving a large portion of the population undiagnosed.</p>
+          </div>
+          <div class="ai-finding">
+            <span class="finding-badge badge-blue">EHR SCANNING</span>
+            <p class="finding-text">AI scans electronic health records to <strong>proactively flag individuals</strong> with known HCV risk factors — IV drug use, blood transfusions, unsafe practices — before they ever show symptoms. (Bal, 2024)</p>
+          </div>
+          <div class="ai-finding">
+            <span class="finding-badge badge-blue">RISK SCORE</span>
+            <p class="finding-text">A <strong>5-item AI risk score</strong> assessing gender, place of origin, IV drug use, self-perceived risk, and past unexplained liver disease achieved <strong>98% sensitivity</strong> (NLR: 0.05) — a cost-effective alternative to universal screening. (Martínez-Sanz et al., 2022)</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Screening -->
+      <div class="ai-domain">
+        <div class="ai-domain-header screening">
+          <div class="domain-icon">🔬</div>
+          <div>
+            <div class="domain-name">Screening</div>
+            <div class="domain-tagline">Accurate diagnosis without the needle</div>
+          </div>
+        </div>
+        <div class="ai-domain-body">
+          <div class="ai-finding">
+            <span class="finding-badge badge-green">BIOPSY LIMITS</span>
+            <p class="finding-text">Traditional liver biopsy carries a <strong>0.01% mortality risk</strong> and is subjective — METAVIR inter-observer agreement is only moderate (κ = 0.58), meaning two pathologists can grade the same biopsy differently. (Chowdhury &amp; Mehta, 2023)</p>
+          </div>
+          <div class="ai-finding">
+            <span class="finding-badge badge-green">LIVER FUNCTION AI</span>
+            <p class="finding-text">An AI liver function test system achieved <strong>&gt;90% diagnostic accuracy</strong> and improved detection by <strong>43% vs. standard care</strong> — using routine lab samples with no biopsy required. (Bal, 2024)</p>
+          </div>
+          <div class="ai-finding">
+            <span class="finding-badge badge-green">IMAGING AI</span>
+            <p class="finding-text">The deep learning DLRE model predicted cirrhosis (F4) at <strong>97% accuracy</strong> and advanced fibrosis at <strong>98% accuracy</strong>. AI ultrasound achieved <strong>92% accuracy</strong> vs. 76.1% for experienced radiologists. (Bal, 2024)</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Treatment -->
+      <div class="ai-domain">
+        <div class="ai-domain-header treatment">
+          <div class="domain-icon">💊</div>
+          <div>
+            <div class="domain-name">Treatment</div>
+            <div class="domain-tagline">AI as clinical decision support</div>
+          </div>
+        </div>
+        <div class="ai-domain-body">
+          <div class="ai-finding">
+            <span class="finding-badge badge-orange">IHSDS MODEL</span>
+            <p class="finding-text">The Intelligent Hepatitis C Stage Diagnosis System (ANN model) staged HCV fibrosis at <strong>94.44% precision</strong> using 18 clinical features — outperforming SVM (85.6%), Random Forest (90.3%), and XGBoost (81%). No biopsy needed. (Butt et al., 2021)</p>
+          </div>
+          <div class="ai-finding">
+            <span class="finding-badge badge-orange">HCC RISK</span>
+            <p class="finding-text">A deep learning RNN trained on <strong>48,000 patients</strong> with HCV-related cirrhosis predicted liver cancer risk at <strong>75% accuracy</strong> vs. 68% for traditional models — capturing long-term patterns traditional models miss. (Ioannou et al., 2020)</p>
+          </div>
+          <div class="ai-finding">
+            <span class="finding-badge badge-orange">ECG DETECTION</span>
+            <p class="finding-text">A CNN trained on ECG recordings from <strong>5,212 patients</strong> detected cirrhosis at <strong>90% accuracy</strong> (sensitivity 84.9%, specificity 83.2%) — using only ECG data, no biopsy or imaging required. (Bal, 2024)</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Comparison table -->
+    <h3 style="font-family:'DM Serif Display',serif;font-size:1.4rem;color:var(--navy);margin-top:3rem;margin-bottom:0.5rem">Liver Biopsy vs. AI: Side-by-Side Comparison</h3>
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>Measure</th>
+          <th>Traditional Liver Biopsy</th>
+          <th>AI-Based System</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Invasiveness</td><td>Invasive (needle insertion)</td><td>Non-invasive</td></tr>
+        <tr><td>Mortality risk</td><td>~0.01%</td><td>None</td></tr>
+        <tr><td>Observer agreement</td><td>Moderate (κ = 0.58)</td><td>Consistent, reproducible</td></tr>
+        <tr><td>Cirrhosis accuracy</td><td>Variable by pathologist</td><td>97% (DLRE model)</td></tr>
+        <tr><td>Advanced fibrosis accuracy</td><td>Variable by pathologist</td><td>98% (DLRE model)</td></tr>
+        <tr><td>Detection rate vs. standard care</td><td>Baseline</td><td>+43% improvement</td></tr>
+        <tr><td>Cost</td><td>High (procedure + lab)</td><td>Uses existing EHR/lab data</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:0.75rem;color:#889;margin-top:0.5rem"><em>Sources: Chowdhury &amp; Mehta (2023); Bal (2024); Wang et al. (2019); Butt et al. (2021)</em></p>
+  </div>
+</section>
+
+<!-- POLICIES & LAWS -->
+<section id="policies">
+  <div class="section-inner">
+    <div class="section-tag">Andrea Jawwad &middot; Section 03</div>
+    <h2 class="section-title">Policies, Laws &amp; Clinical Recommendations</h2>
+    <p class="section-sub">The use of AI in healthcare requires clear regulations to ensure safety, accuracy, and ethical implementation. Here are the key frameworks governing AI-powered HCV care.</p>
+
+    <!-- Bridge context -->
+    <div class="bridge">
+      <h3>Why Policies Shape AI's Effectiveness</h3>
+      <p>Despite major advancements in screening, treatment, and technology, hepatitis C continues to be a persistent public health challenge. Artificial intelligence has the potential to significantly improve early detection by analyzing electronic health records and identifying high-risk individuals. However, the effectiveness of AI is directly shaped by the policies and laws that govern healthcare data.</p>
+      <p>Privacy regulations are essential for protecting sensitive patient information, but they can also limit how data is shared. At the same time, laws like the 21st Century Cures Act aim to improve data access, helping create better conditions for AI to function effectively. The challenge is balancing innovation with patient privacy — and ensuring AI-driven solutions benefit all populations equitably.</p>
+    </div>
+
+    <div class="policy-grid">
+      <div class="policy-card">
+        <div class="policy-header">
+          <div class="policy-law">Federal Privacy Law</div>
+          <div class="policy-name">Health Insurance Portability &amp; Accountability Act (HIPAA)</div>
+        </div>
+        <div class="policy-body">
+          <p>HIPAA is the primary law protecting patient health information (PHI) in the United States. It applies to hospitals, clinics, insurance companies, and any organization that handles protected health information.</p>
+          <p>The law requires that patient data is stored securely, shared only when necessary, and accessed only by authorized individuals. Organizations using AI must implement safeguards like encryption, secure databases, and strict access controls to remain compliant.</p>
+          <div class="policy-relevance">
+            <strong>HCV + AI Relevance</strong>
+            AI systems that analyze patient data — lab results, medical history, risk factors — to identify who should be screened must comply with HIPAA to ensure patient privacy is not compromised.
+          </div>
+        </div>
+      </div>
+
+      <div class="policy-card">
+        <div class="policy-header">
+          <div class="policy-law">Federal Regulation</div>
+          <div class="policy-name">42 CFR Part 2: Substance Use Disorder Privacy</div>
+        </div>
+        <div class="policy-body">
+          <p>42 CFR Part 2 provides additional privacy protections specifically for individuals receiving substance use disorder (SUD) treatment. It restricts how information related to substance use can be disclosed, requiring explicit patient consent before sharing.</p>
+          <p>This helps build trust and encourages individuals to seek care without fear of stigma or exposure.</p>
+          <div class="policy-relevance">
+            <strong>HCV + AI Relevance</strong>
+            Because injection drug use is a primary HCV transmission route, AI tools predicting high-risk populations may rely on SUD data. This law limits how that data can be used — developers must be careful when integrating AI systems.
+          </div>
+        </div>
+      </div>
+
+      <div class="policy-card">
+        <div class="policy-header">
+          <div class="policy-law">Clinical Guidelines</div>
+          <div class="policy-name">CDC &amp; USPSTF Hepatitis C Screening Recommendations</div>
+        </div>
+        <div class="policy-body">
+          <p>The CDC recommends screening all adults 18+ at least once in their lifetime, with routine screening for high-risk individuals and pregnant women during each pregnancy.</p>
+          <p>The USPSTF recommends screening for adults aged 18–79, which directly influences insurance coverage. Preventive services following strong USPSTF recommendations are typically covered without cost to the patient.</p>
+          <div class="policy-relevance">
+            <strong>HCV + AI Relevance</strong>
+            AI tools can help ensure these recommendations are followed consistently by identifying eligible individuals and prompting providers to act — reducing missed opportunities for early diagnosis.
+          </div>
+        </div>
+      </div>
+
+      <div class="policy-card">
+        <div class="policy-header">
+          <div class="policy-law">Federal Law</div>
+          <div class="policy-name">Affordable Care Act (ACA)</div>
+        </div>
+        <div class="policy-body">
+          <p>The ACA requires most private insurance plans to cover preventive services with strong clinical recommendations — such as hepatitis C screening — without charging copays or deductibles.</p>
+          <p>This law plays a major role in making prevention financially accessible, especially for vulnerable populations who are at higher risk of hepatitis C.</p>
+          <div class="policy-relevance">
+            <strong>HCV + AI Relevance</strong>
+            Even if AI systems successfully identify individuals who need testing, those individuals must be able to afford care. The ACA ensures financial barriers do not prevent follow-through after AI identification.
+          </div>
+        </div>
+      </div>
+
+      <div class="policy-card">
+        <div class="policy-header">
+          <div class="policy-law">Federal Law</div>
+          <div class="policy-name">21st Century Cures Act</div>
+        </div>
+        <div class="policy-body">
+          <p>The 21st Century Cures Act focuses on improving healthcare innovation and access to information. A key component prevents "information blocking" — healthcare providers cannot unnecessarily restrict access to electronic health data.</p>
+          <p>This also promotes transparency by allowing patients to access their own health information, increasing engagement in their care.</p>
+          <div class="policy-relevance">
+            <strong>HCV + AI Relevance</strong>
+            AI systems rely on large, high-quality datasets. Better data access allows AI tools to more accurately identify trends, predict risk, and support coordinated care across different providers.
+          </div>
+        </div>
+      </div>
+
+      <div class="policy-card">
+        <div class="policy-header">
+          <div class="policy-law">Federal Regulation</div>
+          <div class="policy-name">FDA Regulations on AI Medical Devices</div>
+        </div>
+        <div class="policy-body">
+          <p>The FDA regulates medical devices, including certain AI-based tools used in healthcare. If an AI system assists with diagnosis, risk prediction, or treatment decisions, it may need to go through FDA review to ensure it is safe and effective.</p>
+          <p>FDA oversight helps ensure AI tools meet quality standards, reduce the risk of inaccurate predictions, minimize algorithmic bias, and provide reliable support to healthcare providers.</p>
+          <div class="policy-relevance">
+            <strong>HCV + AI Relevance</strong>
+            Without proper regulation, AI can reinforce existing health disparities. FDA oversight ensures that the 94% precision and 98% accuracy results seen in research translate to validated, trustworthy clinical tools.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESOURCES -->
+<section id="resources">
+  <div class="section-inner">
+    <div class="section-tag green">All Members &middot; Section 04</div>
+    <h2 class="section-title">Educational Resources</h2>
+    <p class="section-sub">Curated videos and materials to deepen your understanding of Hepatitis C and how AI is transforming its prevention and care.</p>
+
+    <div class="resources-grid">
+      <div class="resource-group">
+        <h3>🦠 Hepatitis C Education</h3>
+        <div class="video-grid">
+          <div class="video-embed">
+            <iframe src="https://www.youtube.com/embed/uvqDTbusdUU" allowfullscreen title="HCV Education Video 1"></iframe>
+            <div class="video-label">What is Hepatitis C?</div>
+          </div>
+          <div class="video-embed">
+            <iframe src="https://www.youtube.com/embed/mkiDXTS6-mU" allowfullscreen title="HCV Education Video 2"></iframe>
+            <div class="video-label">HCV Transmission &amp; Prevention</div>
+          </div>
+          <div class="video-embed">
+            <iframe src="https://www.youtube.com/embed/fStLnjrZF_c" allowfullscreen title="HCV Education Video 3"></iframe>
+            <div class="video-label">Diagnosis &amp; Treatment</div>
+          </div>
+          <div class="video-embed">
+            <iframe src="https://www.youtube.com/embed/CXy1byguvJY" allowfullscreen title="HCV Education Video 4"></iframe>
+            <div class="video-label">Living with Hepatitis C</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="resource-group">
+        <h3>⚖️ Policies &amp; AI in Healthcare</h3>
+        <div class="video-grid">
+          <div class="video-embed">
+            <iframe src="https://www.youtube.com/embed/PJC89XtFf7s" allowfullscreen title="Policy Video 1"></iframe>
+            <div class="video-label">Healthcare Policies Overview</div>
+          </div>
+          <div class="video-embed">
+            <iframe src="https://www.youtube.com/embed/Wp-ApzPObnI" allowfullscreen title="Policy Video 2"></iframe>
+            <div class="video-label">AI Regulations in Healthcare</div>
+          </div>
+        </div>
+
+        <!-- Key references -->
+        <div style="margin-top:1.5rem">
+          <h3 style="font-size:1rem;margin-bottom:1rem">📖 Key References</h3>
+          <div style="display:flex;flex-direction:column;gap:0.75rem">
+            <a href="https://www.cdc.gov/hepatitisc/about/index.html" target="_blank" style="display:block;background:var(--white);border:1px solid var(--gray);border-radius:10px;padding:0.85rem 1rem;text-decoration:none;transition:box-shadow 0.2s" onmouseover="this.style.boxShadow='0 4px 15px rgba(0,0,0,0.08)'" onmouseout="this.style.boxShadow='none'">
+              <div style="font-size:0.7rem;color:var(--midgray);font-family:'Space Mono',monospace;margin-bottom:0.2rem">CDC.GOV</div>
+              <div style="font-size:0.88rem;font-weight:600;color:var(--navy)">Hepatitis C Basics</div>
+              <div style="font-size:0.78rem;color:var(--midgray)">Centers for Disease Control and Prevention, 2025</div>
+            </a>
+            <a href="https://www.who.int/news-room/fact-sheets/detail/hepatitis-c" target="_blank" style="display:block;background:var(--white);border:1px solid var(--gray);border-radius:10px;padding:0.85rem 1rem;text-decoration:none;transition:box-shadow 0.2s" onmouseover="this.style.boxShadow='0 4px 15px rgba(0,0,0,0.08)'" onmouseout="this.style.boxShadow='none'">
+              <div style="font-size:0.7rem;color:var(--midgray);font-family:'Space Mono',monospace;margin-bottom:0.2rem">WHO.INT</div>
+              <div style="font-size:0.88rem;font-weight:600;color:var(--navy)">Hepatitis C Fact Sheet</div>
+              <div style="font-size:0.78rem;color:var(--midgray)">World Health Organization, 2025</div>
+            </a>
+            <a href="https://doi.org/10.4274/vhd.galenos.2024.2023-12-4" target="_blank" style="display:block;background:var(--white);border:1px solid var(--gray);border-radius:10px;padding:0.85rem 1rem;text-decoration:none;transition:box-shadow 0.2s" onmouseover="this.style.boxShadow='0 4px 15px rgba(0,0,0,0.08)'" onmouseout="this.style.boxShadow='none'">
+              <div style="font-size:0.7rem;color:var(--midgray);font-family:'Space Mono',monospace;margin-bottom:0.2rem">VIRAL HEPATITIS JOURNAL</div>
+              <div style="font-size:0.88rem;font-weight:600;color:var(--navy)">AI in the Diagnosis &amp; Management of Viral Hepatitis</div>
+              <div style="font-size:0.78rem;color:var(--midgray)">Bal, T. (2024)</div>
+            </a>
+            <a href="https://doi.org/10.1155/2021/8062410" target="_blank" style="display:block;background:var(--white);border:1px solid var(--gray);border-radius:10px;padding:0.85rem 1rem;text-decoration:none;transition:box-shadow 0.2s" onmouseover="this.style.boxShadow='0 4px 15px rgba(0,0,0,0.08)'" onmouseout="this.style.boxShadow='none'">
+              <div style="font-size:0.7rem;color:var(--midgray);font-family:'Space Mono',monospace;margin-bottom:0.2rem">JOURNAL OF HEALTHCARE ENGINEERING</div>
+              <div style="font-size:0.88rem;font-weight:600;color:var(--navy)">Diagnosing the Stage of Hepatitis C Using Machine Learning</div>
+              <div style="font-size:0.78rem;color:var(--midgray)">Butt et al. (2021)</div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section id="team">
+  <div class="section-inner">
+    <div class="section-tag">Group 4 &middot; Section 05</div>
+    <h2 class="section-title">Meet the Team</h2>
+    <p class="section-sub">Graduate students at San José State University combining expertise in healthcare, technology, and policy to make complex health information accessible and actionable.</p>
+
+    <div class="vision-box">
+      <div>
+        <h3>Our Vision</h3>
+        <p>As graduate students in Health Informatics, our goal is to make complex health information accessible and actionable. By combining expertise in healthcare, technology, and policy, we hope this site serves as a meaningful resource for anyone seeking to understand Hepatitis C and the role artificial intelligence is playing in transforming how it is detected, treated, and ultimately eliminated.</p>
+      </div>
+      <div>
+        <h3>Our Process</h3>
+        <p>We began by identifying Hepatitis C as a topic where technology and public health intersect in meaningful ways. We drew on each member's academic and professional background to approach the topic from multiple angles, holding collaborative sessions to align our research, critique each other's findings, and ensure the final product meets a high standard of rigor and accuracy.</p>
+      </div>
+    </div>
+
+    <div class="team-cards">
+      <div class="team-card">
+        <div class="team-avatar avatar-a">A</div>
+        <div class="team-role">Presenter 3 &middot; Slides 10–14</div>
+        <div class="team-name">Andrea L. Jawwad</div>
+        <p class="team-bio">Holds a Bachelor of Science in Computer Science and currently works for a government agency with experience in public sector project management and data analysis. Responsible for researching and developing the policies, laws, and clinical recommendations section, ensuring information is accurate, clear, and relevant to hepatitis C prevention and the use of AI in healthcare.</p>
+        <span class="team-slides">Policies &amp; Laws</span>
+      </div>
+
+      <div class="team-card">
+        <div class="team-avatar avatar-d">D</div>
+        <div class="team-role">Presenter 2 &middot; Slides 5–9</div>
+        <div class="team-name">Daniza Neri</div>
+        <p class="team-bio">First-year Health Informatics student with a background in Project Management and Operations in UX Research. Responsible for data analysis and reviewing AI methodologies applied to hepatitis surveillance, including prevention, screening, and treatment outcomes. Built the presentation template and website structure and guided the collaborative process throughout the project.</p>
+        <span class="team-slides">AI in HCV Care</span>
+      </div>
+
+      <div class="team-card">
+        <div class="team-avatar avatar-m">M</div>
+        <div class="team-role">Presenter 1 &middot; Slides 1–4</div>
+        <div class="team-name">Miguel Morales</div>
+        <p class="team-bio">Holds a BS in Biology from CSU Long Beach. Has worked for Los Angeles County's Department of Health Services and LA County's Department of Public Health in medical laboratories and disease intervention. First-year student in the Health Informatics MS program. Responsible for the clinical background and treatment evolution section.</p>
+        <span class="team-slides">HCV Background</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p><strong style="color:rgba(255,255,255,0.5)">Leveraging AI to Support Evidence-Based Hepatitis C Prevention</strong></p>
+  <p>INFM 210: Health Informatics &middot; San José State University &middot; Spring 2026 &middot; Group 4</p>
+  <p style="margin-top:0.5rem">Andrea Jawwad &middot; Daniza Neri &middot; Miguel Morales</p>
+  <p style="margin-top:0.75rem;font-size:0.72rem">Sources: <a href="https://www.cdc.gov/hepatitisc">CDC</a> &middot; <a href="https://www.who.int/news-room/fact-sheets/detail/hepatitis-c">WHO</a> &middot; Bal (2024) &middot; Butt et al. (2021) &middot; Chowdhury &amp; Mehta (2023) &middot; Bernal &amp; Soti (2023)</p>
+</footer>
+
+</body>
+</html>
