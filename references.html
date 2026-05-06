@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>References — HCV + AI | INFM 210 Group 4</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #0B1F3A;
+  --blue: #1450A3;
+  --teal: #0E86D4;
+  --sky: #53C0F0;
+  --orange: #E87722;
+  --amber: #F4A636;
+  --white: #FFFFFF;
+  --offwhite: #F7F9FC;
+  --gray: #E8EDF4;
+  --midgray: #8899AA;
+  --dark: #0D1B2A;
+  --glass: rgba(255,255,255,0.08);
+  --glassborder: rgba(255,255,255,0.15);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--offwhite);
+  color: var(--dark);
+  overflow-x: hidden;
+}
+
+/* ── NAV ─────────────────────────────────────────── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(11,31,58,0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--glassborder);
+  padding: 0 2rem;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 64px;
+}
+.nav-brand {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.75rem; color: var(--sky);
+  letter-spacing: 0.08em; text-transform: uppercase;
+}
+.nav-brand span { color: var(--orange); }
+.nav-links { display: flex; gap: 0.25rem; list-style: none; }
+.nav-links a {
+  color: rgba(255,255,255,0.7); text-decoration: none;
+  font-size: 0.82rem; font-weight: 500;
+  padding: 0.4rem 0.75rem; border-radius: 6px;
+  transition: all 0.2s; letter-spacing: 0.02em;
+}
+.nav-links a:hover { color: var(--white); background: var(--glass); }
+.nav-links a.active { color: var(--sky); background: rgba(83,192,240,0.12); }
+
+/* ── PAGE HERO ────────────────────────────────────── */
+.page-hero {
+  background: linear-gradient(135deg, #0B1F3A 0%, #0E3A6E 60%, #1450A3 100%);
+  padding: 7rem 2rem 4rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-grid {
+  position: absolute; inset: 0; opacity: 0.05;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+.page-hero-inner {
+  max-width: 1100px; margin: 0 auto;
+  position: relative; z-index: 2;
+}
+
+.page-tag {
+  display: inline-block;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.7rem; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--orange);
+  background: rgba(232,119,34,0.15);
+  border: 1px solid rgba(232,119,34,0.3);
+  border-radius: 100px; padding: 0.3rem 0.85rem;
+  margin-bottom: 1rem;
+}
+
+.page-hero h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  color: var(--white); line-height: 1.15;
+  margin-bottom: 0.85rem;
+}
+
+.page-hero p {
+  font-size: 1rem; color: rgba(255,255,255,0.65);
+  max-width: 600px; line-height: 1.7;
+}
+
+/* ── FILTER BAR ────────────────────────────────────── */
+.filter-bar {
+  max-width: 1100px; margin: 0 auto;
+  padding: 1.5rem 2rem 0;
+  display: flex; gap: 0.5rem; flex-wrap: wrap;
+}
+
+.filter-btn {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.68rem; letter-spacing: 0.06em;
+  text-transform: uppercase; cursor: pointer;
+  padding: 0.4rem 0.9rem; border-radius: 100px;
+  border: 1px solid var(--gray);
+  background: var(--white); color: var(--midgray);
+  transition: all 0.2s;
+}
+
+.filter-btn:hover, .filter-btn.active {
+  background: var(--navy); color: var(--sky);
+  border-color: var(--navy);
+}
+
+/* ── MAIN CONTENT ─────────────────────────────────── */
+.refs-main {
+  max-width: 1100px; margin: 0 auto;
+  padding: 2.5rem 2rem 5rem;
+}
+
+/* ── GROUP HEADER ─────────────────────────────────── */
+.ref-group-header {
+  display: flex; align-items: center; gap: 1rem;
+  margin: 3rem 0 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid var(--gray);
+}
+
+.ref-group-header:first-child { margin-top: 0; }
+
+.group-icon {
+  width: 40px; height: 40px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.2rem; flex-shrink: 0;
+}
+.group-icon.blue { background: rgba(20,80,163,0.1); }
+.group-icon.orange { background: rgba(232,119,34,0.1); }
+.group-icon.green { background: rgba(45,184,122,0.1); }
+
+.group-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem; color: var(--midgray);
+  text-transform: uppercase; letter-spacing: 0.08em;
+  margin-bottom: 0.2rem;
+}
+
+.group-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.2rem; color: var(--navy);
+}
+
+/* ── REFERENCE CARD ───────────────────────────────── */
+.ref-card {
+  background: var(--white);
+  border: 1px solid var(--gray);
+  border-radius: 16px;
+  padding: 1.75rem;
+  margin-bottom: 1rem;
+  transition: box-shadow 0.3s, transform 0.3s;
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 1.25rem;
+  align-items: start;
+}
+
+.ref-card:hover {
+  box-shadow: 0 8px 30px rgba(20,80,163,0.08);
+  transform: translateY(-2px);
+}
+
+/* Number badge */
+.ref-num {
+  width: 48px; height: 48px;
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.85rem; font-weight: 700;
+  flex-shrink: 0; align-self: start;
+}
+.num-blue { background: rgba(20,80,163,0.1); color: var(--blue); }
+.num-orange { background: rgba(232,119,34,0.1); color: var(--orange); }
+.num-green { background: rgba(45,184,122,0.1); color: #2DB87A; }
+
+.ref-body {}
+
+/* Type badge */
+.ref-type-row {
+  display: flex; gap: 0.5rem; align-items: center;
+  margin-bottom: 0.6rem; flex-wrap: wrap;
+}
+
+.ref-type {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.62rem; letter-spacing: 0.07em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.6rem; border-radius: 6px;
+}
+.type-journal { background: rgba(20,80,163,0.08); color: var(--blue); }
+.type-gov { background: rgba(45,184,122,0.1); color: #2DB87A; }
+.type-clinical { background: rgba(120,80,200,0.1); color: #7850C8; }
+.type-policy { background: rgba(232,119,34,0.1); color: var(--orange); }
+
+.ref-journal-tag {
+  font-size: 0.72rem; color: var(--midgray);
+  font-style: italic;
+}
+
+/* Citation */
+.ref-citation {
+  font-size: 0.88rem;
+  color: var(--navy);
+  line-height: 1.6;
+  margin-bottom: 0.85rem;
+  font-weight: 500;
+}
+
+/* Summary */
+.ref-summary {
+  font-size: 0.85rem;
+  color: #445566;
+  line-height: 1.75;
+  padding: 0.85rem 1rem;
+  background: var(--offwhite);
+  border-radius: 10px;
+  border-left: 3px solid var(--teal);
+  margin-bottom: 0.85rem;
+}
+
+.ref-summary strong {
+  display: block;
+  font-size: 0.7rem;
+  font-family: 'Space Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--teal);
+  margin-bottom: 0.35rem;
+}
+
+/* URL link */
+.ref-link {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  font-size: 0.78rem;
+  color: var(--blue);
+  text-decoration: none;
+  font-family: 'Space Mono', monospace;
+  padding: 0.3rem 0.75rem;
+  border-radius: 8px;
+  background: rgba(20,80,163,0.06);
+  border: 1px solid rgba(20,80,163,0.15);
+  transition: all 0.2s;
+  word-break: break-all;
+}
+.ref-link:hover {
+  background: rgba(20,80,163,0.12);
+  color: var(--navy);
+}
+
+/* ── FOOTER ───────────────────────────────────────── */
+footer {
+  background: #060E1A;
+  padding: 2rem;
+  text-align: center;
+  color: rgba(255,255,255,0.35);
+  font-size: 0.78rem; line-height: 1.7;
+}
+footer a { color: var(--sky); text-decoration: none; }
+
+@media (max-width: 700px) {
+  .ref-card { grid-template-columns: 1fr; }
+  .nav-links { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">HCV<span>+</span>AI &nbsp;&middot;&nbsp; INFM 210</div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="index.html#about">About HCV</a></li>
+    <li><a href="index.html#ai">AI in HCV Care</a></li>
+    <li><a href="index.html#policies">Policies &amp; Laws</a></li>
+    <li><a href="index.html#resources">Resources</a></li>
+    <li><a href="index.html#team">Our Team</a></li>
+    <li><a href="references.html" class="active">References</a></li>
+  </ul>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="hero-grid"></div>
+  <div class="page-hero-inner">
+    <div class="page-tag">INFM 210 &middot; Group 4 &middot; Spring 2026</div>
+    <h1>References</h1>
+    <p>All peer-reviewed articles, government publications, and clinical guidelines cited across this website. Each entry includes a plain-language summary of its relevance to our project.</p>
+  </div>
+</div>
+
+<!-- FILTER BAR -->
+<div class="filter-bar">
+  <button class="filter-btn active">All Sources</button>
+  <button class="filter-btn">Peer-Reviewed</button>
+  <button class="filter-btn">Government / CDC / WHO</button>
+  <button class="filter-btn">Policy &amp; Law</button>
+  <button class="filter-btn">Clinical Guidelines</button>
+</div>
+
+<!-- REFERENCES -->
+<div class="refs-main">
+
+  <!-- GROUP 1: PEER-REVIEWED AI & HCV -->
+  <div class="ref-group-header">
+    <div class="group-icon blue">🤖</div>
+    <div>
+      <div class="group-label">Category 01</div>
+      <div class="group-title">Peer-Reviewed: AI &amp; Hepatitis C</div>
+    </div>
+  </div>
+
+  <!-- Bal 2024 -->
+  <div class="ref-card">
+    <div class="ref-num num-blue">01</div>
+    <div class="ref-body">
+      <div class="ref-type-row">
+        <span class="ref-type type-journal">Peer-Reviewed</span>
+        <span class="ref-journal-tag">World Journal of Hepatology</span>
+      </div>
+      <div class="ref-citation">
+        Bal, C. G. (2024). Artificial intelligence in the care of hepatitis C virus infection. <em>World Journal of Hepatology, 16</em>(1), 1–20.
+      </div>
+      <div class="ref-summary">
+        <strong>Why we used this source</strong>
+        This comprehensive review examines how AI is applied across the full spectrum of HCV care — from radiological and histopathological imaging to EHR data analysis, risk scoring, and HCC prediction. It is the primary source for most AI accuracy statistics cited in the AI in HCV Care section of this website, including the 98% EHR risk score sensitivity, the DLRE model's 97–98% fibrosis staging accuracy, the AI ultrasound result of 92% vs. 76.1% for experienced radiologists, and the 90% ECG-based cirrhosis detection accuracy. The review also highlights key ethical challenges including data privacy, algorithmic bias, and the need for FDA regulatory compliance.
+      </div>
+    </div>
+  </div>
+
+  <!-- Butt 2021 -->
+  <div class="ref-card">
+    <div class="ref-num num-blue">02</div>
+    <div class="ref-body">
+      <div class="ref-type-row">
+        <span class="ref-type type-journal">Peer-Reviewed</span>
+        <span class="ref-journal-tag">World Journal of Gastroenterology</span>
+      </div>
+      <div class="ref-citation">
+        Butt, A. S., Ahmad, A., &amp; Hamid, S. (2021). Artificial intelligence and hepatitis C virus: A systematic review. <em>World Journal of Gastroenterology, 27</em>(44), 7864–7880.
+      </div>
+      <div class="ref-summary">
+        <strong>Why we used this source</strong>
+        This systematic review evaluates multiple AI applications for HCV and presents the Intelligent Hepatitis C Stage Diagnosis System (IHSDS) — an Artificial Neural Network trained on 18 clinical features from 1,385 HCV patients. The IHSDS achieved 94.44% staging precision during validation, outperforming Support Vector Machine (85.6%), Random Forest (90.3%), and XGBoost (81%) models. This source is central to the Treatment section and confirms that HCV is curable in up to 95% of cases with antiviral therapy, while noting that access and detection remain the primary barriers.
+      </div>
+    </div>
+  </div>
+
+  <!-- Chowdhury 2023 -->
+  <div class="ref-card">
+    <div class="ref-num num-blue">03</div>
+    <div class="ref-body">
+      <div class="ref-type-row">
+        <span class="ref-type type-journal">Peer-Reviewed</span>
+        <span class="ref-journal-tag">Journal of Clinical and Experimental Hepatology</span>
+      </div>
+      <div class="ref-citation">
+        Chowdhury, S., &amp; Mehta, C. H. (2023). Artificial intelligence in liver disease. <em>Journal of Clinical and Experimental Hepatology, 13</em>(3), 490–498.
+      </div>
+      <div class="ref-summary">
+        <strong>Why we used this source</strong>
+        This review covers AI applications in liver disease assessment and contextualizes the limitations of traditional liver biopsy — the current gold standard. It documents that inter-observer agreement between pathologists using the METAVIR scoring system is only moderate (κ = 0.58), meaning two experienced pathologists can reach different conclusions from the same biopsy sample. This limitation is a core argument for why non-invasive AI-based screening and staging tools represent a meaningful clinical improvement. Used in the Screening section to justify the biopsy vs. AI comparison.
+      </div>
+    </div>
+  </div>
+
+  <!-- Ioannou 2020 -->
+  <div class="ref-card">
+    <div class="ref-num num-blue">04</div>
+    <div class="ref-body">
+      <div class="ref-type-row">
+        <span class="ref-type type-journal">Peer-Reviewed</span>
+        <span class="ref-journal-tag">PLOS ONE</span>
+      </div>
+      <div class="ref-citation">
+        Ioannou, G. N., Green, P., Kerr, K. F., &amp; Berry, K. (2020). Models estimating risk of hepatocellular carcinoma in patients with hepatitis C virus infection. <em>PLOS ONE, 15</em>(9), e0239311.
+      </div>
+      <div class="ref-summary">
+        <strong>Why we used this source</strong>
+        This study evaluated deep learning recurrent neural network (RNN) models trained on raw longitudinal EHR data from 48,151 patients with HCV-related cirrhosis, tracked for a minimum of 3 years post-diagnosis. The RNN model predicted hepatocellular carcinoma (HCC) risk at 75% accuracy, significantly outperforming traditional logistic regression models at 68% (p &lt; 0.001). This demonstrates that deep learning can capture long-term temporal patterns in patient data that traditional statistical models miss — a key finding in the Treatment section.
+      </div>
+    </div>
+  </div>
+
+  <!-- Martinez-Sanz 2022 -->
+  <div class="ref-card">
+    <div class="ref-num num-blue">05</div>
+    <div class="ref-body">
+      <div class="ref-type-row">
+        <span class="ref-type type-journal">Peer-Reviewed</span>
+        <span class="ref-journal-tag">Journal of Viral Hepatitis</span>
+      </div>
+      <div class="ref-citation">
+        Martinez-Sanz, J., Serrano-Villar, S., Vivancos, M. J., Moreno, S., &amp; Pett, S. L. (2022). HCV screening in men who have sex with men: A 5-item risk-score tool. <em>Journal of Viral Hepatitis, 29</em>(3), 228–237.
+      </div>
+      <div class="ref-summary">
+        <strong>Why we used this source</strong>
+        This study developed and validated a 5-item AI-assisted risk score for targeted HCV testing, assessing gender, place of origin, IV drug use, self-perceived risk, and past unexplained liver disease. The score achieved 98% sensitivity and a negative likelihood ratio of 0.05 for low-scoring individuals — effectively ruling out HCV infection without universal screening. This is the primary evidence for the Prevention section's claim that AI risk scoring substantially outperforms traditional screening approaches (60% sensitivity).
+      </div>
+    </div>
+  </div>
+
+  <!-- Wang 2019 -->
+  <div class="ref-card">
+    <div class="ref-num num-blue">06</div>
+    <div class="ref-body">
+      <div class="ref-type-row">
+        <span class="ref-type type-journal">Peer-Reviewed</span>
+        <span class="ref-journal-tag">Scientific Reports</span>
+      </div>
+      <div class="ref-citation">
+        Wang, X., Yang, M., Ding, C., Li, Y., Guo, Q., &amp; Bai, X. (2019). An artificial intelligence model for the detection of malignant liver tumors with ultrasound. <em>Scientific Reports, 9</em>, 16235.
+      </div>
+      <div class="ref-summary">
+        <strong>Why we used this source</strong>
+        This multicenter study developed and validated a deep convolutional neural network (DCNN) ultrasound model for detecting malignant liver masses. The AI model achieved 92% accuracy compared to 76.1% for experienced radiologists with 15 years of expertise, and as low as 40% for less experienced radiologists. This finding supports a core argument in the Screening section: AI not only matches human expert performance but maintains consistent accuracy regardless of practitioner experience level.
+      </div>
+    </div>
+  </div>
+
+  <!-- GROUP 2: GOVERNMENT & CLINICAL -->
+  <div class="ref-group-header">
+    <div class="group-icon green">🏥</div>
+    <div>
+      <div class="group-label">Category 02</div>
+      <div class="group-title">Government &amp; Clinical Health Resources</div>
+    </div>
+  </div>
+
+  <!-- CDC 2025 -->
+  <div class="ref-card">
+    <div class="ref-num num-green">07</div>
+    <div class="ref-body">
+      <div class="ref-type-row">
+        <span class="ref-type type-gov">Government</span>
+        <span class="ref-journal-tag">Centers for Disease Control and Prevention</span>
+      </div>
+      <div class="ref-citation">
+        Centers for Disease Control and Prevention. (2025). <em>About hepatitis C.</em>
+      </div>
+      <div class="ref-summary">
+        <strong>Why we used this source</strong>
+        The CDC's foundational public-facing resource on Hepatitis C covers transmission routes, symptoms across the acute and chronic phases, diagnosis methods (antibody test followed by HCV RNA confirmation), and treatment with direct-acting antivirals. This source is the primary reference for Miguel's About HCV section, providing the clinical foundation for understanding who gets HCV, how it progresses, and how it is currently managed. Used to cite the 290,000 annual deaths and the epidemiological burden of HCV.
+      </div>
+      <a href="https://www.cdc.gov/hepatitis-c/about/index.html" target="_blank" class="ref-link">
+        ↗ cdc.gov/hepatitis-c/about/index.html
+      </a>
+    </div>
+  </div>
+
+  <!-- CDC 2023 Clinical Care -->
+  <div class="ref-card">
+    <div class="ref-num num-green">08</div>
+    <div class="ref-body">
+      <div class="ref-type-row">
+        <span class="ref-type type-gov">Government</span>
+        <span class="ref-journal-tag">Centers for Disease Control and Prevention</span>
+      </div>
+      <div class="ref-citation">
+        Centers for Disease Control and Prevention. (2023). <em>Clinical care of hepatitis C.</em>
+      </div>
+      <div class="ref-summary">
+        <strong>Why we used this source</strong>
+        This CDC clinical resource provides guidance specifically for healthcare providers managing HCV patients, including testing algorithms, treatment protocols (including pan-genotypic DAA options), monitoring recommendations, and guidance on managing coexisting conditions such as HIV and substance use disorders. It reinforces the clinical context for why timely diagnosis matters and supports the treatment section's emphasis on comprehensive care beyond antiviral therapy alone.
+      </div>
+      <a href="https://www.cdc.gov/hepatitis-c/hcp/clinical-care/index.html" target="_blank" class="ref-link">
+        ↗ cdc.gov/hepatitis-c/hcp/clinical-care/index.html
+      </a>
+    </div>
+  </div>
+
+  <!-- GROUP 3: POLICY & LAW -->
+  <div class="ref-group-header">
+    <div class="group-icon orange">⚖️</div>
+    <div>
+      <div class="group-label">Category 03</div>
+      <div class="group-title">Policy, Law &amp; Regulatory Frameworks</div>
+    </div>
+  </div>
+
+  <!-- Healthcare.gov -->
+  <div class="ref-card">
+    <div class="ref-num num-orange">09</div>
+    <div class="ref-body">
+      <div class="ref-type-row">
+        <span class="ref-type type-policy">Policy</span>
+        <span class="ref-journal-tag">Healthcare.gov / Affordable Care Act</span>
+      </div>
+      <div class="ref-citation">
+        Healthcare.gov. (2024). <em>Preventive health services.</em>
+      </div>
+      <div class="ref-summary">
+        <strong>Why we used this source</strong>
+        This resource explains the preventive care coverage requirements under the Affordable Care Act (ACA), including that HCV screening must be covered without copays or deductibles for eligible individuals. This is critical to the Policies section because even if AI identifies a high-risk individual, financial barriers can prevent follow-through. The ACA's coverage mandate is what ensures that AI-assisted identification translates into actual care access, particularly for vulnerable and underserved populations.
+      </div>
+      <a href="https://www.healthcare.gov/coverage/preventive-care-benefits/" target="_blank" class="ref-link">
+        ↗ healthcare.gov/coverage/preventive-care-benefits
+      </a>
+    </div>
+  </div>
+
+  <!-- ONC Information Blocking -->
+  <div class="ref-card">
+    <div class="ref-num num-orange">10</div>
+    <div class="ref-body">
+      <div class="ref-type-row">
+        <span class="ref-type type-policy">Policy</span>
+        <span class="ref-journal-tag">Office of the National Coordinator for Health IT</span>
+      </div>
+      <div class="ref-citation">
+        Office of the National Coordinator for Health Information Technology. (2023). <em>Information blocking.</em>
+      </div>
+      <div class="ref-summary">
+        <strong>Why we used this source</strong>
+        This ONC resource explains the information blocking provisions introduced under the 21st Century Cures Act, which prohibit healthcare providers from unreasonably restricting access to electronic health information. For AI systems that depend on large, high-quality datasets to function accurately, free data flow across providers is essential. This source supports the argument that the 21st Century Cures Act directly enables more effective AI tools by improving data access and interoperability across healthcare settings.
+      </div>
+      <a href="https://www.healthit.gov/topic/information-blocking" target="_blank" class="ref-link">
+        ↗ healthit.gov/topic/information-blocking
+      </a>
+    </div>
+  </div>
+
+  <!-- 42 CFR Part 2 -->
+  <div class="ref-card">
+    <div class="ref-num num-orange">11</div>
+    <div class="ref-body">
+      <div class="ref-type-row">
+        <span class="ref-type type-policy">Federal Regulation</span>
+        <span class="ref-journal-tag">U.S. Department of Health and Human Services</span>
+      </div>
+      <div class="ref-citation">
+        U.S. Department of Health and Human Services. (2023). <em>42 CFR Part 2: Confidentiality of substance use disorder patient records.</em>
+      </div>
+      <div class="ref-summary">
+        <strong>Why we used this source</strong>
+        42 CFR Part 2 is a federal regulation that provides stricter-than-HIPAA privacy protections for individuals receiving substance use disorder (SUD) treatment. Because injection drug use is a primary HCV transmission route, AI tools designed to identify high-risk HCV populations often encounter SUD-related data. This regulation requires explicit patient consent before sharing such information, meaning AI developers must build consent-compliant systems. Understanding this law is essential for any health informatics professional designing AI tools for HCV populations.
+      </div>
+      <a href="https://www.hhs.gov/hipaa/part-2/index.html" target="_blank" class="ref-link">
+        ↗ hhs.gov/hipaa/part-2/index.html
+      </a>
+    </div>
+  </div>
+
+  <!-- HIPAA -->
+  <div class="ref-card">
+    <div class="ref-num num-orange">12</div>
+    <div class="ref-body">
+      <div class="ref-type-row">
+        <span class="ref-type type-policy">Federal Law</span>
+        <span class="ref-journal-tag">U.S. Department of Health and Human Services</span>
+      </div>
+      <div class="ref-citation">
+        U.S. Department of Health and Human Services. (2024). <em>Health Insurance Portability and Accountability Act (HIPAA).</em>
+      </div>
+      <div class="ref-summary">
+        <strong>Why we used this source</strong>
+        HIPAA is the foundational federal law governing the privacy and security of patient health information in the United States. Any AI system that analyzes patient lab results, EHR data, or medical history to identify HCV risk must comply with HIPAA's requirements for data encryption, access controls, and minimal disclosure. This source provides the legal basis for understanding what protections must be built into AI-based healthcare tools and why health informatics professionals must understand privacy law as part of system design.
+      </div>
+      <a href="https://www.hhs.gov/hipaa/index.html" target="_blank" class="ref-link">
+        ↗ hhs.gov/hipaa/index.html
+      </a>
+    </div>
+  </div>
+
+  <!-- FDA AI -->
+  <div class="ref-card">
+    <div class="ref-num num-orange">13</div>
+    <div class="ref-body">
+      <div class="ref-type-row">
+        <span class="ref-type type-policy">Federal Regulation</span>
+        <span class="ref-journal-tag">U.S. Food and Drug Administration</span>
+      </div>
+      <div class="ref-citation">
+        U.S. Food and Drug Administration. (2024). <em>Artificial intelligence and machine learning in medical devices.</em>
+      </div>
+      <div class="ref-summary">
+        <strong>Why we used this source</strong>
+        The FDA regulates AI-based tools used in clinical settings as medical devices when they assist with diagnosis, risk prediction, or treatment decisions. This regulatory framework ensures that AI tools — such as those detecting liver fibrosis from imaging or predicting HCC risk — must demonstrate safety and effectiveness before deployment. The FDA's role is essential for ensuring the high accuracy rates reported in peer-reviewed studies (e.g., 94.44% IHSDS precision, 97% DLRE accuracy) translate into validated, trustworthy clinical tools that reduce rather than reinforce health disparities.
+      </div>
+      <a href="https://www.fda.gov/medical-devices/software-medical-device-samd/artificial-intelligence-and-machine-learning-medical-devices" target="_blank" class="ref-link">
+        ↗ fda.gov — AI and Machine Learning in Medical Devices
+      </a>
+    </div>
+  </div>
+
+  <!-- USPSTF -->
+  <div class="ref-card">
+    <div class="ref-num num-orange">14</div>
+    <div class="ref-body">
+      <div class="ref-type-row">
+        <span class="ref-type type-clinical">Clinical Guidelines</span>
+        <span class="ref-journal-tag">U.S. Preventive Services Task Force</span>
+      </div>
+      <div class="ref-citation">
+        U.S. Preventive Services Task Force. (2020). <em>Screening for hepatitis C virus infection in adolescents and adults.</em>
+      </div>
+      <div class="ref-summary">
+        <strong>Why we used this source</strong>
+        The USPSTF's Grade B recommendation for HCV screening in all adults aged 18–79 carries significant policy weight: it directly influences insurance coverage decisions under the ACA, ensuring that screening is available without cost-sharing for eligible individuals. This recommendation also defines what AI screening tools should prioritize — identifying patients who meet these criteria but have not yet been tested. It is a foundational reference for the Policies section and for understanding how clinical guidelines shape the practical deployment of AI in preventive care.
+      </div>
+      <a href="https://www.uspreventiveservicestaskforce.org/uspstf/recommendation/hepatitis-c-screening" target="_blank" class="ref-link">
+        ↗ uspreventiveservicestaskforce.org — HCV Screening Recommendation
+      </a>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p><strong style="color:rgba(255,255,255,0.5)">Leveraging AI to Support Evidence-Based Hepatitis C Prevention</strong></p>
+  <p>INFM 210: Health Informatics &middot; San José State University &middot; Spring 2026 &middot; Group 4</p>
+  <p style="margin-top:0.5rem">Andrea Jawwad &middot; Daniza Neri &middot; Miguel Morales</p>
+</footer>
+
+</body>
+</html>
