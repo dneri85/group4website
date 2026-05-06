@@ -791,6 +791,109 @@ footer {
 
 footer a { color: var(--sky); text-decoration: none; }
 
+/* ── RESOURCES RESTRUCTURED ───────────────────────── */
+.resource-section { margin-bottom: 3rem; }
+.resource-section:last-child { margin-bottom: 0; }
+
+.resource-section-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.4rem;
+  color: var(--navy);
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid var(--gray);
+}
+
+.video-grid-lg {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.ref-links-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-bottom: 0.25rem;
+}
+
+.ref-link-card {
+  display: block;
+  background: var(--white);
+  border: 1px solid var(--gray);
+  border-radius: 10px;
+  padding: 0.85rem 1rem;
+  text-decoration: none;
+  transition: box-shadow 0.2s;
+  color: inherit;
+}
+.ref-link-card:hover { box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
+.ref-link-source {
+  font-size: 0.7rem;
+  color: var(--midgray);
+  font-family: 'Space Mono', monospace;
+  margin-bottom: 0.2rem;
+}
+.ref-link-title {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--navy);
+  line-height: 1.4;
+}
+.ref-link-author {
+  font-size: 0.78rem;
+  color: var(--midgray);
+  margin-top: 0.15rem;
+}
+
+.ref-type-badge {
+  display: inline-block;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+  margin-bottom: 0.4rem;
+}
+.badge-journal { background: rgba(20,80,163,0.08); color: var(--blue); }
+.badge-gov     { background: rgba(45,184,122,0.1);  color: #2DB87A; }
+.badge-policy  { background: rgba(232,119,34,0.1);  color: var(--orange); }
+.badge-clinical{ background: rgba(120,80,200,0.1);  color: #7850C8; }
+
+.ref-cat-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 2rem 0 0.85rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 2px solid var(--gray);
+}
+.ref-cat-header:first-child { margin-top: 0; }
+.ref-cat-icon {
+  width: 32px; height: 32px;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.95rem;
+  flex-shrink: 0;
+}
+.ref-cat-icon.blue   { background: rgba(20,80,163,0.1); }
+.ref-cat-icon.green  { background: rgba(45,184,122,0.1); }
+.ref-cat-icon.orange { background: rgba(232,119,34,0.1); }
+.ref-cat-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.6rem;
+  color: var(--midgray);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.1rem;
+}
+.ref-cat-name {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1rem;
+  color: var(--navy);
+}
+
 /* ── HAMBURGER ────────────────────────────────────── */
 .hamburger {
   display: none;
@@ -822,6 +925,7 @@ footer a { color: var(--sky); text-decoration: none; }
   .ai-intro { grid-template-columns: 1fr; }
   .policy-grid { grid-template-columns: 1fr; }
   .resources-grid { grid-template-columns: 1fr; }
+  .video-grid-lg { grid-template-columns: 1fr 1fr; }
   .team-cards { grid-template-columns: 1fr; }
   .vision-box { grid-template-columns: 1fr; }
   .stat-row { grid-template-columns: 1fr 1fr; }
@@ -845,6 +949,8 @@ footer a { color: var(--sky); text-decoration: none; }
 @media (max-width: 480px) {
   .hero-nav-cards { grid-template-columns: 1fr; }
   .video-grid { grid-template-columns: 1fr; }
+  .video-grid-lg { grid-template-columns: 1fr; }
+  .ref-links-grid { grid-template-columns: 1fr; }
   section { padding: 3.5rem 1.25rem; }
   .hero-content { padding: 5rem 1.25rem 3rem; }
   .ai-intro { padding: 1.5rem; gap: 1rem; }
@@ -1332,68 +1438,162 @@ footer a { color: var(--sky); text-decoration: none; }
     <h2 class="section-title">Educational Resources</h2>
     <p class="section-sub">Curated videos and materials to deepen your understanding of Hepatitis C and how AI is transforming its prevention and care.</p>
 
-    <div class="resources-grid">
-      <div class="resource-group">
-        <h3>🦠 Hepatitis C Education</h3>
-        <div class="video-grid">
-          <div class="video-embed">
-            <iframe src="https://www.youtube.com/embed/uvqDTbusdUU" allowfullscreen title="HCV Education Video 1"></iframe>
-            <div class="video-label">What is Hepatitis C?</div>
-          </div>
-          <div class="video-embed">
-            <iframe src="https://www.youtube.com/embed/mkiDXTS6-mU" allowfullscreen title="HCV Education Video 2"></iframe>
-            <div class="video-label">HCV Transmission &amp; Prevention</div>
-          </div>
-          <div class="video-embed">
-            <iframe src="https://www.youtube.com/embed/fStLnjrZF_c" allowfullscreen title="HCV Education Video 3"></iframe>
-            <div class="video-label">Diagnosis &amp; Treatment</div>
-          </div>
-          <div class="video-embed">
-            <iframe src="https://www.youtube.com/embed/CXy1byguvJY" allowfullscreen title="HCV Education Video 4"></iframe>
-            <div class="video-label">Living with Hepatitis C</div>
-          </div>
+    <!-- All Videos -->
+    <div class="resource-section">
+      <h3 class="resource-section-title">📺 Curated Videos</h3>
+      <div class="video-grid-lg">
+        <div class="video-embed">
+          <iframe src="https://www.youtube.com/embed/uvqDTbusdUU" allowfullscreen title="What is Hepatitis C?"></iframe>
+          <div class="video-label">What is Hepatitis C?</div>
+        </div>
+        <div class="video-embed">
+          <iframe src="https://www.youtube.com/embed/mkiDXTS6-mU" allowfullscreen title="HCV Transmission & Prevention"></iframe>
+          <div class="video-label">HCV Transmission &amp; Prevention</div>
+        </div>
+        <div class="video-embed">
+          <iframe src="https://www.youtube.com/embed/fStLnjrZF_c" allowfullscreen title="Diagnosis & Treatment"></iframe>
+          <div class="video-label">Diagnosis &amp; Treatment</div>
+        </div>
+        <div class="video-embed">
+          <iframe src="https://www.youtube.com/embed/CXy1byguvJY" allowfullscreen title="Living with Hepatitis C"></iframe>
+          <div class="video-label">Living with Hepatitis C</div>
+        </div>
+        <div class="video-embed">
+          <iframe src="https://www.youtube.com/embed/PJC89XtFf7s" allowfullscreen title="Healthcare Policies Overview"></iframe>
+          <div class="video-label">Healthcare Policies Overview</div>
+        </div>
+        <div class="video-embed">
+          <iframe src="https://www.youtube.com/embed/Wp-ApzPObnI" allowfullscreen title="AI Regulations in Healthcare"></iframe>
+          <div class="video-label">AI Regulations in Healthcare</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Written Sources -->
+    <div class="resource-section">
+      <h3 class="resource-section-title">📖 Key References</h3>
+
+      <!-- Category 01: Peer-Reviewed -->
+      <div class="ref-cat-header">
+        <div class="ref-cat-icon blue">🤖</div>
+        <div>
+          <div class="ref-cat-label">Category 01</div>
+          <div class="ref-cat-name">Peer-Reviewed: AI &amp; Hepatitis C</div>
+        </div>
+      </div>
+      <div class="ref-links-grid">
+        <a href="https://doi.org/10.4274/vhd.galenos.2024.2023-12-4" target="_blank" class="ref-link-card">
+          <div class="ref-type-badge badge-journal">Peer-Reviewed</div>
+          <div class="ref-link-source">Viral Hepatitis</div>
+          <div class="ref-link-title">Artificial intelligence in the diagnosis and management of viral hepatitis</div>
+          <div class="ref-link-author">Bal, T. (2024)</div>
+        </a>
+        <a href="https://doi.org/10.1155/2021/8062410" target="_blank" class="ref-link-card">
+          <div class="ref-type-badge badge-journal">Peer-Reviewed</div>
+          <div class="ref-link-source">World Journal of Gastroenterology</div>
+          <div class="ref-link-title">Artificial intelligence and hepatitis C virus: A systematic review</div>
+          <div class="ref-link-author">Butt, A. S., Ahmad, A., &amp; Hamid, S. (2021)</div>
+        </a>
+        <div class="ref-link-card">
+          <div class="ref-type-badge badge-journal">Peer-Reviewed</div>
+          <div class="ref-link-source">Journal of Clinical and Experimental Hepatology</div>
+          <div class="ref-link-title">Artificial intelligence in liver disease</div>
+          <div class="ref-link-author">Chowdhury, S., &amp; Mehta, C. H. (2023)</div>
+        </div>
+        <div class="ref-link-card">
+          <div class="ref-type-badge badge-journal">Peer-Reviewed</div>
+          <div class="ref-link-source">PLOS ONE</div>
+          <div class="ref-link-title">Models estimating risk of hepatocellular carcinoma in patients with hepatitis C virus infection</div>
+          <div class="ref-link-author">Ioannou, G. N., Green, P., Kerr, K. F., &amp; Berry, K. (2020)</div>
+        </div>
+        <div class="ref-link-card">
+          <div class="ref-type-badge badge-journal">Peer-Reviewed</div>
+          <div class="ref-link-source">Journal of Viral Hepatitis</div>
+          <div class="ref-link-title">HCV screening in men who have sex with men: A 5-item risk-score tool</div>
+          <div class="ref-link-author">Martinez-Sanz, J., Serrano-Villar, S., Vivancos, M. J., Moreno, S., &amp; Pett, S. L. (2022)</div>
+        </div>
+        <div class="ref-link-card">
+          <div class="ref-type-badge badge-journal">Peer-Reviewed</div>
+          <div class="ref-link-source">Scientific Reports</div>
+          <div class="ref-link-title">An artificial intelligence model for the detection of malignant liver tumors with ultrasound</div>
+          <div class="ref-link-author">Wang, X., Yang, M., Ding, C., Li, Y., Guo, Q., &amp; Bai, X. (2019)</div>
         </div>
       </div>
 
-      <div class="resource-group">
-        <h3>⚖️ Policies &amp; AI in Healthcare</h3>
-        <div class="video-grid">
-          <div class="video-embed">
-            <iframe src="https://www.youtube.com/embed/PJC89XtFf7s" allowfullscreen title="Policy Video 1"></iframe>
-            <div class="video-label">Healthcare Policies Overview</div>
-          </div>
-          <div class="video-embed">
-            <iframe src="https://www.youtube.com/embed/Wp-ApzPObnI" allowfullscreen title="Policy Video 2"></iframe>
-            <div class="video-label">AI Regulations in Healthcare</div>
-          </div>
+      <!-- Category 02: Government & Clinical -->
+      <div class="ref-cat-header">
+        <div class="ref-cat-icon green">🏥</div>
+        <div>
+          <div class="ref-cat-label">Category 02</div>
+          <div class="ref-cat-name">Government &amp; Clinical Health Resources</div>
         </div>
+      </div>
+      <div class="ref-links-grid">
+        <a href="https://www.cdc.gov/hepatitis-c/about/index.html" target="_blank" class="ref-link-card">
+          <div class="ref-type-badge badge-gov">Government</div>
+          <div class="ref-link-source">Centers for Disease Control and Prevention</div>
+          <div class="ref-link-title">About Hepatitis C</div>
+          <div class="ref-link-author">CDC (2025)</div>
+        </a>
+        <a href="https://www.cdc.gov/hepatitis-c/hcp/clinical-care/index.html" target="_blank" class="ref-link-card">
+          <div class="ref-type-badge badge-gov">Government</div>
+          <div class="ref-link-source">Centers for Disease Control and Prevention</div>
+          <div class="ref-link-title">Clinical Care of Hepatitis C</div>
+          <div class="ref-link-author">CDC (2023)</div>
+        </a>
+        <a href="https://www.who.int/news-room/fact-sheets/detail/hepatitis-c" target="_blank" class="ref-link-card">
+          <div class="ref-type-badge badge-gov">Government</div>
+          <div class="ref-link-source">World Health Organization</div>
+          <div class="ref-link-title">Hepatitis C Fact Sheet</div>
+          <div class="ref-link-author">WHO (2025)</div>
+        </a>
+      </div>
 
-        <!-- Key references -->
-        <div style="margin-top:1.5rem">
-          <h3 style="font-size:1rem;margin-bottom:1rem">📖 Key References</h3>
-          <div style="display:flex;flex-direction:column;gap:0.75rem">
-            <a href="https://www.cdc.gov/hepatitisc/about/index.html" target="_blank" style="display:block;background:var(--white);border:1px solid var(--gray);border-radius:10px;padding:0.85rem 1rem;text-decoration:none;transition:box-shadow 0.2s" onmouseover="this.style.boxShadow='0 4px 15px rgba(0,0,0,0.08)'" onmouseout="this.style.boxShadow='none'">
-              <div style="font-size:0.7rem;color:var(--midgray);font-family:'Space Mono',monospace;margin-bottom:0.2rem">CDC.GOV</div>
-              <div style="font-size:0.88rem;font-weight:600;color:var(--navy)">Hepatitis C Basics</div>
-              <div style="font-size:0.78rem;color:var(--midgray)">Centers for Disease Control and Prevention, 2025</div>
-            </a>
-            <a href="https://www.who.int/news-room/fact-sheets/detail/hepatitis-c" target="_blank" style="display:block;background:var(--white);border:1px solid var(--gray);border-radius:10px;padding:0.85rem 1rem;text-decoration:none;transition:box-shadow 0.2s" onmouseover="this.style.boxShadow='0 4px 15px rgba(0,0,0,0.08)'" onmouseout="this.style.boxShadow='none'">
-              <div style="font-size:0.7rem;color:var(--midgray);font-family:'Space Mono',monospace;margin-bottom:0.2rem">WHO.INT</div>
-              <div style="font-size:0.88rem;font-weight:600;color:var(--navy)">Hepatitis C Fact Sheet</div>
-              <div style="font-size:0.78rem;color:var(--midgray)">World Health Organization, 2025</div>
-            </a>
-            <a href="https://doi.org/10.4274/vhd.galenos.2024.2023-12-4" target="_blank" style="display:block;background:var(--white);border:1px solid var(--gray);border-radius:10px;padding:0.85rem 1rem;text-decoration:none;transition:box-shadow 0.2s" onmouseover="this.style.boxShadow='0 4px 15px rgba(0,0,0,0.08)'" onmouseout="this.style.boxShadow='none'">
-              <div style="font-size:0.7rem;color:var(--midgray);font-family:'Space Mono',monospace;margin-bottom:0.2rem">VIRAL HEPATITIS JOURNAL</div>
-              <div style="font-size:0.88rem;font-weight:600;color:var(--navy)">AI in the Diagnosis &amp; Management of Viral Hepatitis</div>
-              <div style="font-size:0.78rem;color:var(--midgray)">Bal, T. (2024)</div>
-            </a>
-            <a href="https://doi.org/10.1155/2021/8062410" target="_blank" style="display:block;background:var(--white);border:1px solid var(--gray);border-radius:10px;padding:0.85rem 1rem;text-decoration:none;transition:box-shadow 0.2s" onmouseover="this.style.boxShadow='0 4px 15px rgba(0,0,0,0.08)'" onmouseout="this.style.boxShadow='none'">
-              <div style="font-size:0.7rem;color:var(--midgray);font-family:'Space Mono',monospace;margin-bottom:0.2rem">JOURNAL OF HEALTHCARE ENGINEERING</div>
-              <div style="font-size:0.88rem;font-weight:600;color:var(--navy)">Diagnosing the Stage of Hepatitis C Using Machine Learning</div>
-              <div style="font-size:0.78rem;color:var(--midgray)">Butt et al. (2021)</div>
-            </a>
-          </div>
+      <!-- Category 03: Policy, Law & Regulatory -->
+      <div class="ref-cat-header">
+        <div class="ref-cat-icon orange">⚖️</div>
+        <div>
+          <div class="ref-cat-label">Category 03</div>
+          <div class="ref-cat-name">Policy, Law &amp; Regulatory Frameworks</div>
         </div>
+      </div>
+      <div class="ref-links-grid">
+        <a href="https://www.healthcare.gov/coverage/preventive-care-benefits/" target="_blank" class="ref-link-card">
+          <div class="ref-type-badge badge-policy">Policy</div>
+          <div class="ref-link-source">Healthcare.gov / Affordable Care Act</div>
+          <div class="ref-link-title">Preventive Health Services</div>
+          <div class="ref-link-author">Healthcare.gov (2024)</div>
+        </a>
+        <a href="https://www.healthit.gov/topic/information-blocking" target="_blank" class="ref-link-card">
+          <div class="ref-type-badge badge-policy">Policy</div>
+          <div class="ref-link-source">Office of the National Coordinator for Health IT</div>
+          <div class="ref-link-title">Information Blocking — 21st Century Cures Act</div>
+          <div class="ref-link-author">ONC (2023)</div>
+        </a>
+        <a href="https://www.hhs.gov/hipaa/part-2/index.html" target="_blank" class="ref-link-card">
+          <div class="ref-type-badge badge-policy">Federal Regulation</div>
+          <div class="ref-link-source">U.S. Dept. of Health and Human Services</div>
+          <div class="ref-link-title">42 CFR Part 2: Substance Use Disorder Privacy</div>
+          <div class="ref-link-author">HHS (2023)</div>
+        </a>
+        <a href="https://www.hhs.gov/hipaa/index.html" target="_blank" class="ref-link-card">
+          <div class="ref-type-badge badge-policy">Federal Law</div>
+          <div class="ref-link-source">U.S. Dept. of Health and Human Services</div>
+          <div class="ref-link-title">Health Insurance Portability &amp; Accountability Act (HIPAA)</div>
+          <div class="ref-link-author">HHS (2024)</div>
+        </a>
+        <a href="https://www.fda.gov/medical-devices/software-medical-device-samd/artificial-intelligence-and-machine-learning-medical-devices" target="_blank" class="ref-link-card">
+          <div class="ref-type-badge badge-policy">Federal Regulation</div>
+          <div class="ref-link-source">U.S. Food and Drug Administration</div>
+          <div class="ref-link-title">AI and Machine Learning in Medical Devices</div>
+          <div class="ref-link-author">FDA (2024)</div>
+        </a>
+        <a href="https://www.uspreventiveservicestaskforce.org/uspstf/recommendation/hepatitis-c-screening" target="_blank" class="ref-link-card">
+          <div class="ref-type-badge badge-clinical">Clinical Guidelines</div>
+          <div class="ref-link-source">U.S. Preventive Services Task Force</div>
+          <div class="ref-link-title">Screening for Hepatitis C Virus Infection in Adolescents and Adults</div>
+          <div class="ref-link-author">USPSTF (2020)</div>
+        </a>
       </div>
     </div>
   </div>
@@ -1420,7 +1620,6 @@ footer a { color: var(--sky); text-decoration: none; }
     <div class="team-cards">
       <div class="team-card">
         <div class="team-avatar avatar-a">A</div>
-        <div class="team-role">Presenter 3 &middot; Slides 10–14</div>
         <div class="team-name">Andrea L. Jawwad</div>
         <p class="team-bio">Holds a Bachelor of Science in Computer Science and currently works for a government agency with experience in public sector project management and data analysis. Responsible for researching and developing the policies, laws, and clinical recommendations section, ensuring information is accurate, clear, and relevant to hepatitis C prevention and the use of AI in healthcare.</p>
         <span class="team-slides">Policies &amp; Laws</span>
@@ -1428,17 +1627,15 @@ footer a { color: var(--sky); text-decoration: none; }
 
       <div class="team-card">
         <div class="team-avatar avatar-d">D</div>
-        <div class="team-role">Presenter 2 &middot; Slides 5–9</div>
-        <div class="team-name">Daniza Neri</div>
-        <p class="team-bio">First-year Health Informatics student with a background in Project Management and Operations in UX Research. Responsible for data analysis and reviewing AI methodologies applied to hepatitis surveillance, including prevention, screening, and treatment outcomes. Built the presentation template and website structure and guided the collaborative process throughout the project.</p>
+        <div class="team-name">Dani Neri</div>
+        <p class="team-bio">A first-year Health Informatics student holding a Bachelor of Science in Business Management, with a professional background spanning Project Management, Operations, and UX Research. For this project, Dani led data analysis and evaluated AI methodologies across hepatitis C surveillance, covering prevention, screening, and treatment outcomes. She also designed the presentation template and website, and guided the team's collaborative process from start to finish.</p>
         <span class="team-slides">AI in HCV Care</span>
       </div>
 
       <div class="team-card">
         <div class="team-avatar avatar-m">M</div>
-        <div class="team-role">Presenter 1 &middot; Slides 1–4</div>
         <div class="team-name">Miguel Morales</div>
-        <p class="team-bio">Holds a BS in Biology from CSU Long Beach. Has worked for Los Angeles County's Department of Health Services and LA County's Department of Public Health in medical laboratories and disease intervention. First-year student in the Health Informatics MS program. Responsible for the clinical background and treatment evolution section.</p>
+        <p class="team-bio">Holds a Bachelor of Science in Biology from CSU Long Beach. Has worked for Los Angeles County's Department of Health Services and LA County's Department of Public Health in medical laboratories and disease intervention. First-year student in the Health Informatics MS program. Responsible for the clinical background and treatment evolution section.</p>
         <span class="team-slides">HCV Background</span>
       </div>
     </div>
@@ -1450,7 +1647,7 @@ footer a { color: var(--sky); text-decoration: none; }
   <p><strong style="color:rgba(255,255,255,0.5)">Leveraging AI to Support Evidence-Based Hepatitis C Prevention</strong></p>
   <p>INFM 210: Health Informatics &middot; San José State University &middot; Spring 2026 &middot; Group 4</p>
   <p style="margin-top:0.5rem">Andrea Jawwad &middot; Daniza Neri &middot; Miguel Morales</p>
-  <p style="margin-top:0.75rem;font-size:0.72rem">© 2026 | Group 4 | INFM 210 | SJSU </p>
+  <p style="margin-top:0.75rem;font-size:0.72rem">Sources: <a href="https://www.cdc.gov/hepatitisc">CDC</a> &middot; <a href="https://www.who.int/news-room/fact-sheets/detail/hepatitis-c">WHO</a> &middot; Bal (2024) &middot; Butt et al. (2021) &middot; Chowdhury &amp; Mehta (2023) &middot; Bernal &amp; Soti (2023)</p>
 </footer>
 
 <script>
